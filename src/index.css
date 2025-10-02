@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+:root {
+  /* === Dark Mode (default) === */
+  --primary: #d81b60;       /* Vibrant deep pink */
+  --primary-light: #ff5c8d; /* Hot pink hover */
+  --primary-dark: #880e4f;  /* Dark magenta */
+
+  --secondary: #7c4dff;     /* Purple accent */
+  --accent: #4fc3f7;        /* Blue accent */
+
+  --text-dark: #f8f8ff;     /* White text */
+  --text-light: #b3b3c9;    /* Muted gray text */
+
+  --bg-light: #121212;      /* Main background */
+  --bg-medium: #1c1c28;     /* Panels/sections */
+  --bg-dark: #0a0a14;       /* Deep background */
+  --card-bg: #1e1a24;       /* Card with purple tint */
+
+  --nav-bg: rgba(20, 20, 28, 0.95);
+  --border-color: #2a2a3d;
+
+  --glow-color: rgba(216, 27, 96, 0.6);
+  --button-gradient: linear-gradient(135deg, #d81b60 0%, #7c4dff 100%);
+  --shadow: 0 4px 10px rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+.light-mode {
+  /* === Light Mode Overrides === */
+  --primary: #ec407a;       /* Softer pink */
+  --primary-light: #f48fb1; /* Warm rose */
+  --primary-dark: #c2185b;  /* Strong but not too dark */
+
+  --secondary: #9575cd;     /* Softer purple */
+  --accent: #64b5f6;        /* Softer blue */
+
+  --text-dark: #212121;     /* Black text */
+  --text-light: #555;       /* Muted text */
+
+  --bg-light: #fdfdfd;      /* White background */
+  --bg-medium: #fbeaf1;     /* Light pink-lavender background */
+  --bg-dark: #ffffff;       /* Panels */
+  --card-bg: #ffe4ec;       /* Card with pink tint */
+
+  --nav-bg: rgba(255, 255, 255, 0.9);
+  --border-color: #e0e0e0;
+
+  --glow-color: rgba(236, 64, 122, 0.4);
+  --button-gradient: linear-gradient(135deg, #ec407a 0%, #9575cd 100%);
+  --shadow: 0 4px 8px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+/* Smooth transition between theme colors */
+:root, .light-mode {
+  transition:
+    background-color 0.4s ease,
+    color 0.4s ease,
+    border-color 0.4s ease,
+    box-shadow 0.4s ease;
+}
+/* Theme transition overlay */
+.theme-transition {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(236, 64, 122, 0.6), rgba(124, 77, 255, 0.5));
+  pointer-events: none;
+  opacity: 0;
+  z-index: 9999;
+  transition: opacity 0.4s ease;
+}
+
+.theme-transition.active {
+  opacity: 1;
+}
