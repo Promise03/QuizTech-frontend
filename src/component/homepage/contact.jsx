@@ -3,12 +3,12 @@ import {Phone, Map, MessagesSquare } from 'lucide-react';
 
 export default function Contact() {
   return (
-    <div className='py-20 px-0 bg-white m-7'>
+    <div className='py-20 px-0 contact-content '>
     
-    <section >
+    <section className='m-7'>
         <div  >
             <div className='text-center mb-12'>
-                <h2 className='text-4xl font-semibold mb-4 text-[#212529]'>Get In Touch</h2>
+                <h2 className='text-4xl font-semibold mb-4 '>Get In Touch</h2>
                 <p className='max-w-150 mx-auto text-[#6c757d]'>Have questions or feedback? We'd love to hear from you!</p>
             </div>
             
@@ -74,6 +74,7 @@ export default function Contact() {
                 </div>
             </div>
         </div>
+        
     </section>
     </div>
   )

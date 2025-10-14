@@ -7,10 +7,10 @@ const Contact = () => {
   return (
     <>
       <Header/>
-       <div className="min-h-screen bg-gray-100 text-gray-800 px-8 pt-20">
-      <div className="container mx-auto max-w-4xl bg-white p-12 rounded-2xl shadow-xl">
+       <div className="min-h-screen contact px-8 py-20">
+      <div className="container mx-auto max-w-4xl bg-white p-12 rounded-2xl shadow-xl con-card">
         <h2 className="text-5xl font-extrabold text-center text-indigo-900 mb-12">Get in Touch</h2>
-        <div className="grid md:grid-cols-2 gap-12">
+        <div className="grid md:grid-cols-2 gap-12 ">
           {/* Contact Form */}
           <div>
             <form className="space-y-6">

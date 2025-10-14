@@ -3,7 +3,7 @@ import { ChevronDown } from 'lucide-react'
 
 export default function FAQ() {
   return (
-    <div className='bg-[#f8f9fa] py-20 px-0'>
+    <div className='faq-content py-20 px-0'>
         <section>
         <div className="container">
             <div className='text-center mb-12' >
@@ -11,8 +11,8 @@ export default function FAQ() {
                 <p className='max-w-150 mx-auto text-[#6c757d]'>Find answers to common questions about QuizMaster</p>
             </div>
             
-            <div className='max-w-200 mx-auto my-0' >
-                <div className=" bg-white rounded-lg mb-4 shadow-[0 2px 10px (0, 0, 0.05)]">
+            <div className='max-w-200 mx-auto my-0 ' >
+                <div className="  rounded-lg mb-4 shadow-[0 2px 10px (0, 0, 0.05)] card">
                     <div className="p-5 items-center flex cursor-pointer justify-between ">
                         <span>How do I create an account?</span>
                        <ChevronDown/>
@@ -22,7 +22,7 @@ export default function FAQ() {
                     </div>
                 </div>
                 
-                <div className="bg-white rounded-lg mb-4 shadow-[0 2px 10px (0, 0, 0.05)]">
+                <div className=" rounded-lg mb-4 shadow-[0 2px 10px (0, 0, 0.05)] card">
                     <div className="p-5 items-center flex cursor-pointer justify-between">
                         <span>Is QuizMaster free to use?</span>
                         <ChevronDown/>
@@ -32,7 +32,7 @@ export default function FAQ() {
                     </div>
                 </div>
                 
-                <div className="bg-white rounded-lg mb-4 shadow-[0 2px 10px (0, 0, 0.05)]">
+                <div className="card rounded-lg mb-4 shadow-[0 2px 10px (0, 0, 0.05)]">
                     <div className="p-5 items-center flex cursor-pointer justify-between">
                         <span>Can I create my own quizzes?</span>
                      <ChevronDown/>
@@ -42,7 +42,7 @@ export default function FAQ() {
                     </div>
                 </div>
                 
-                <div className="bg-white rounded-lg mb-4 shadow-[0 2px 10px (0, 0, 0.05)]">
+                <div className="card rounded-lg mb-4 shadow-[0 2px 10px (0, 0, 0.05)]">
                     <div className="p-5 items-center flex cursor-pointer justify-between">
                         <span>How are the leaderboards calculated?</span>
                      <ChevronDown/>

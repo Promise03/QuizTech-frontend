@@ -1,56 +1,58 @@
 @import "tailwindcss";
 
+/* === 🌑 DARK MODE (Default) === */
 :root {
-  /* === Dark Mode (default) === */
-  --primary: #d81b60;       /* Vibrant deep pink */
-  --primary-light: #ff5c8d; /* Hot pink hover */
-  --primary-dark: #880e4f;  /* Dark magenta */
+  --primary: #1e88e5;       /* Bright electric blue */
+  --primary-light: #64b5f6; /* Lighter blue hover */
+  --primary-dark: #0d47a1;  /* Deep navy blue */
 
-  --secondary: #7c4dff;     /* Purple accent */
-  --accent: #4fc3f7;        /* Blue accent */
+  --secondary: #0a0a0a;     /* Deep black base */
+  --accent: #00e5ff;        /* Neon cyan accent */
 
-  --text-dark: #f8f8ff;     /* White text */
-  --text-light: #b3b3c9;    /* Muted gray text */
+  --text-dark: #e3f2fd;     /* Light bluish white text */
+  --text-light: #90caf9;    /* Muted sky blue text */
 
-  --bg-light: #121212;      /* Main background */
-  --bg-medium: #1c1c28;     /* Panels/sections */
-  --bg-dark: #0a0a14;       /* Deep background */
-  --card-bg: #1e1a24;       /* Card with purple tint */
+  --bg-light: #0b0f1a;      /* Darkest background */
+  --bg-medium: #121826;     /* Panels / sections */
+  --bg-dark: #000000;       /* Absolute black background */
+  --card-bg: #101620;       /* Slight navy tint for cards */
 
-  --nav-bg: rgba(20, 20, 28, 0.95);
-  --border-color: #2a2a3d;
+  --nav-bg: rgba(15, 20, 30, 0.95);
+  --border-color: #1e3a5f;
 
-  --glow-color: rgba(216, 27, 96, 0.6);
-  --button-gradient: linear-gradient(135deg, #d81b60 0%, #7c4dff 100%);
-  --shadow: 0 4px 10px rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.25);
+  --glow-color: rgba(0, 229, 255, 0.6); /* Cyan glow */
+  --button-gradient: linear-gradient(135deg, #1e88e5 0%, #00e5ff 100%);
+  --shadow: 0 4px 12px rgba(0, 229, 255, 0.15),
+             0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
+/* === ☀️ LIGHT MODE === */
 .light-mode {
-  /* === Light Mode Overrides === */
-  --primary: #ec407a;       /* Softer pink */
-  --primary-light: #f48fb1; /* Warm rose */
-  --primary-dark: #c2185b;  /* Strong but not too dark */
+  --primary: #1976d2;       /* Vibrant medium blue */
+  --primary-light: #63a4ff; /* Bright blue hover */
+  --primary-dark: #004ba0;  /* Navy blue */
 
-  --secondary: #9575cd;     /* Softer purple */
-  --accent: #64b5f6;        /* Softer blue */
+  --secondary: #000000;     /* Black accent */
+  --accent: #00bcd4;        /* Fresh cyan */
 
-  --text-dark: #212121;     /* Black text */
-  --text-light: #555;       /* Muted text */
+  --text-dark: #1a1a1a;     /* Main dark text */
+  --text-light: #5f6f7f;    /* Muted gray-blue text */
 
-  --bg-light: #fdfdfd;      /* White background */
-  --bg-medium: #fbeaf1;     /* Light pink-lavender background */
-  --bg-dark: #ffffff;       /* Panels */
-  --card-bg: #ffe4ec;       /* Card with pink tint */
+  --bg-light: #f5f9ff;      /* Gentle light-blue white */
+  --bg-medium: #e3f2fd;     /* Very light blue panel */
+  --bg-dark: #fafafa;       /* Subtle contrast section */
+  --card-bg: #ffffff;       /* Clean white card */
 
-  --nav-bg: rgba(255, 255, 255, 0.9);
-  --border-color: #e0e0e0;
+  --nav-bg: rgba(255, 255, 255, 0.95);
+  --border-color: #cfd8dc;
 
-  --glow-color: rgba(236, 64, 122, 0.4);
-  --button-gradient: linear-gradient(135deg, #ec407a 0%, #9575cd 100%);
-  --shadow: 0 4px 8px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.08);
+  --glow-color: rgba(25, 118, 210, 0.4);
+  --button-gradient: linear-gradient(135deg, #1976d2 0%, #00bcd4 100%);
+  --shadow: 0 4px 10px rgba(0, 0, 0, 0.15),
+             0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-/* Smooth transition between theme colors */
+/* === Smooth Transition Between Themes === */
 :root, .light-mode {
   transition:
     background-color 0.4s ease,
@@ -58,17 +60,117 @@
     border-color 0.4s ease,
     box-shadow 0.4s ease;
 }
-/* Theme transition overlay */
-.theme-transition {
-  position: fixed;
-  inset: 0;
-  background: radial-gradient(circle at center, rgba(236, 64, 122, 0.6), rgba(124, 77, 255, 0.5));
-  pointer-events: none;
-  opacity: 0;
-  z-index: 9999;
-  transition: opacity 0.4s ease;
+
+
+/* === Global Elements === */
+.navbar {
+  background-color: var(--nav-bg);
+  color: var(--text-dark);
+  box-shadow: var(--shadow);
+}
+.Hero h1{
+  color: var(--text-light);
+}
+.Hero p{
+  color: var(--text-dark);
+}
+.Hero {
+  background: 
+    linear-gradient(
+      rgba(10, 20, 30, 0.3),
+      rgba(0, 0, 0, 0.5)
+    ),
+    url(/about1.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: var(--text-light);
 }
 
-.theme-transition.active {
-  opacity: 1;
+
+.about-content, .contact-content, .about, .contact {
+  background-color: var(--bg-medium);
+  color: var(--text-light);
+}
+.about h3, h4, p, .contact h2, h3 {
+  color: var(--text-dark);
+}
+.abt-card, .con-card{
+  background-color: var(--card-bg);
+   box-shadow: var(--shadow);
+}
+
+.about-content h2, .contact-content h2, .faq-content h2, .about h2 {
+  color: var(--text-dark);
+}
+.abt-img:hover {
+  animation-play-state: paused;
+  transform: scale(1.02); /* small zoom-in on hover */
+  box-shadow: 0 0 25px var(--glow-color);
+}
+/* === Floating Animation === */
+@keyframes floatUpDown {
+  0%, 100% {
+    transform: translateY(0); /* Start & end at original position */
+  }
+  50% {
+    transform: translateY(-15px); /* Moves up slightly */
+  }
+}
+
+/* Apply the animation */
+.abt-img {
+  animation: floatUpDown 4s ease-in-out infinite;
+  transition: transform 0.3s ease;
+}
+
+
+.faq-content {
+  background-color: var(--bg-light);
+  color: var(--text-light);
+}
+
+.card {
+  background-color: var(--card-bg);
+  color: var(--text-dark);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border-color);
+}
+
+.contact-content span,
+input,
+label {
+  color: var(--text-light);
+}
+
+/* === Button Style Example === */
+/* button {
+  background: var(--button-gradient);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  box-shadow: var(--shadow);
+  border: none;
+  transition: all 0.3s ease;
+}
+
+ button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px var(--glow-color);
+} */
+
+
+.login-content, .register-content, .verify-otp{
+  /* background-color: var(--accent); */
+  background-image: url(/auth.jpg);
+  box-shadow: var(--glow-color);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: var(--text-light);
+  
+}
+
+footer{
+  background-color: var(--bg-dark);
 }

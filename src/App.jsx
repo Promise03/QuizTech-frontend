@@ -5,11 +5,11 @@ import React from "react"
 import Home from "./pages/Home"
 import Register from "./pages/authpage/Register"
 import Forgetpassword from "./pages/authpage/forgetpassword"
-import CreatePassword from "./pages/authpage/CreatePassword"
+// import CreatePassword from "./pages/authpage/CreatePassword"
 import Changepassword from "./pages/authpage/changepassword"
-import Welcome from "./userpage/pages/Home"
-import Good from "./userpage/pages/Home2"
-import Group from "./userpage/pages/Home3"
+// import Welcome from "./userpage/pages/Home"
+// import Good from "./userpage/pages/Home2"
+// import Group from "./userpage/pages/Home3"
 import UserDashboard from "./userpage/pages/Dashboarduser"
 import About from "./pages/About"
 import Contact from "./pages/Contact"
@@ -19,6 +19,13 @@ import QuizzesPage from "./userpage/pages/Quizpage"
 import SettingsPage from "./userpage/pages/Setting"
 import AchievementsPage from "./userpage/pages/Achievement"
 import QuizHistoryPage from "./userpage/pages/QuizHistory"
+import AdminLayout from "./Admin/AdminLayout"
+import UsersPage from "./Admin/pages/User"
+import AdminQuizzes from "./Admin/pages/Quizze"
+import AdminAnalytics from "./Admin/pages/Analytics"
+import DocumentsAdmin from "./Admin/pages/Document"
+import VerifyOtp from "./pages/authpage/otp"
+import QuizStarter from "./userpage/pages/starterpage"
 
 
 
@@ -32,19 +39,22 @@ function App() {
 <Route path="/login" element={<Login/>}></Route>
 <Route path="/register" element={<Register/>}></Route>
 <Route path="/forgetPassword" element={<Forgetpassword/>}></Route>
-<Route path="/createPassword" element={<CreatePassword/>}></Route>
+<Route path="/quiz/start/:quizId" element={<QuizStarter/>}></Route>
 <Route path="/changePassword" element={<Changepassword/>}></Route>
 <Route path="/about" element={<About/>}></Route>
   <Route path="/contact" element={<Contact/>}></Route>
-  {/* <Route path="/" element={<Home/>}></Route> */}
+  <Route path="/*" element={<Home/>}></Route>
+  <Route path="/verify-otp" element={<VerifyOtp/>}></Route>
+
+
 
 
 
 
 {/* userRoute */}
-<Route path="/welcome" element={<Welcome/>}></Route>
-<Route path="/good" element={<Good/>}></Route>
-<Route path="/group" element={<Group/>}></Route>
+{/* <Route path="/welcome" element={<Welcome/>}></Route> */}
+{/* <Route path="/good" element={<Good/>}></Route> */}
+{/* <Route path="/group" element={<Group/>}></Route> */}
 <Route path="/userDashboard" element={<UserDashboard/>}></Route>
 <Route path="/Document" element={<DocumentPage/>}></Route>
 <Route path="/quizzes" element={<QuizzesPage/>}></Route>
@@ -55,11 +65,15 @@ function App() {
 
 
 
-{/* Admin route */}
-<Route path="/adminDashboard" element={<AdminDashboard/>}></Route>
-<Route path="/good" element={<Good/>}></Route>
-<Route path="/group" element={<Group/>}></Route>
-<Route path="/userDashboard" element={<UserDashboard/>}></Route>
+
+  {/* Admin Routes */}
+      <Route path="/admin" element={<AdminLayout />}>
+        <Route index element={<AdminDashboard />} />
+        <Route path="users" element={<UsersPage />} />
+        <Route path="quizzes" element={<AdminQuizzes />} />
+        <Route path="analytics" element={<AdminAnalytics />} />
+        <Route path="document" element={<DocumentsAdmin/>} />
+      </Route>
 
 </Routes>
    </>

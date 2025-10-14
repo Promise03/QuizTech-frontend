@@ -3,66 +3,103 @@ import { Mail, Phone, MapPin, Facebook, Twitter, Instagram } from 'lucide-react'
 
 export default function Footer() {
   return (
-    <div >
-      <div className='flex justify-between m-7 items-center'>
-        <div className='w-1/5'>
-             <h1 className='text-3xl font-semibold mb-4 font-serif'>QuizTech</h1>
-             <p>Enzzyme Capital Partners, a fund manager with 50+ years of collective VC experience, has propelled over 100 organizations, weaving innovation into Africa's business fabric, and managing $20M+ in VC Funds. Join us in shaping the future</p>
+    <footer className="footer text-sm md:text-base">
+      <div className="flex flex-wrap justify-between gap-10 px-8 py-12 md:px-16 md:py-16 max-w-7xl mx-auto">
+        
+        {/* === Brand Info === */}
+        <div className="w-full md:w-1/4 space-y-3">
+          <h1 className="text-3xl font-semibold mb-3 font-serif text-[var(--primary-light)]">
+            QuizTech
+          </h1>
+          <p className="text-[var(--text-light)] leading-relaxed">
+            Enzzyme Capital Partners, a fund manager with 50+ years of collective VC experience, has propelled over 100 organizations, weaving innovation into Africa's business fabric, and managing $20M+ in VC Funds. Join us in shaping the future.
+          </p>
         </div>
-       <div>
-        <h3 className='text-3xl font-semibold mb-4'>Qiuck Link</h3>
-        <ul className='space-y-2 text-lg font-medium' >
-            <li>Home</li>
-            <li>About Us</li>
-            <li>FAQ</li>
-            <li>Contact Us</li>
-            <li>Login</li>
-        </ul>
-       </div>
-      
-        <div className="">
-            <div>
-              <h3 className="text-3xl font-semibold  mb-4">Contact Information</h3>
-              <div className="flex items-center space-x-4 text-lg text-gray-600 mb-3">
-                <Mail size={18} className="text-indigo-600"/>
+
+        {/* === Quick Links === */}
+        <div className="w-full md:w-1/5">
+          <h3 className="text-2xl font-semibold mb-4 text-[var(--text-dark)]">Quick Links</h3>
+          <ul className="space-y-2 text-[var(--text-light)]">
+            {["Home", "About Us", "FAQ", "Contact Us", "Login"].map((item) => (
+              <li
+                key={item}
+                className="hover:text-[var(--accent)] transition-colors duration-300 cursor-pointer"
+              >
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+        
+
+        {/* === Contact Info === */}
+        <div className="w-full md:w-1/3 space-y-5">
+          <div>
+            <h3 className="text-2xl font-semibold mb-4 text-[var(--text-dark)]">
+              Contact Information
+            </h3>
+            <div className="space-y-3">
+              <div className="flex items-center space-x-3 text-[var(--text-light)]">
+                <Mail size={18} className="text-[var(--accent)]" />
                 <span>hello@quizup.com</span>
               </div>
-              <div className="flex items-center space-x-4 text-lg text-gray-600 mb-3">
-                <Phone size={18} className="text-indigo-600"/>
+              <div className="flex items-center space-x-3 text-[var(--text-light)]">
+                <Phone size={18} className="text-[var(--accent)]" />
                 <span>+1 (555) 123-4567</span>
               </div>
-              <div className="flex items-center space-x-4 text-lg text-gray-600">
-                <MapPin size={18} className="text-indigo-600"/>
+              <div className="flex items-center space-x-3 text-[var(--text-light)]">
+                <MapPin size={18} className="text-[var(--accent)]" />
                 <span>123 Quiz Street, Knowledge City, QZ 12345</span>
-              </div>
-            </div>
-            
-            <div>
-              <h3 className="text-3xl font-semibold text-indigo-800 mb-4">Follow Us</h3>
-              <div className="flex space-x-6">
-                <a href="#" className="text-gray-500 hover:text-indigo-600 transition-colors duration-300">
-                  <Facebook size={24}/>
-                </a>
-                <a href="#" className="text-gray-500 hover:text-indigo-600 transition-colors duration-300">
-                  <Twitter size={24}/>
-                </a>
-                <a href="#" className="text-gray-500 hover:text-indigo-600 transition-colors duration-300">
-                  <Instagram size={24}/>
-                </a>
               </div>
             </div>
           </div>
 
-            <div className='w-1/5'>
-                <p className='mb-8 font-bold'>Stay updated with my latest projects!</p>
-                <form action="" className='flex gap-2.5 flex-col'>
-                    <input type="mail" placeholder='your email' className='border px-2 py-2 rounded-2xl'/>
-                    <button className=" w-1/2 px-8 py-4  font-bold text-white bg-indigo-600 rounded-full shadow-lg hover:bg-indigo-700 transform hover:scale-105 transition-all duration-300" >Subscribe</button>
-                </form>
+          {/* === Social Links === */}
+          <div>
+            <h3 className="text-2xl font-semibold mb-4 text-[var(--text-dark)]">
+              Follow Us
+            </h3>
+            <div className="flex space-x-6">
+              {[Facebook, Twitter, Instagram].map((Icon, i) => (
+                <a
+                  key={i}
+                  href="#"
+                  className="text-[var(--text-light)] hover:text-[var(--accent)] transition-colors duration-300"
+                >
+                  <Icon size={22} />
+                </a>
+              ))}
             </div>
+          </div>
+        </div>
 
+        {/* === Subscribe Form === */}
+        <div className="w-full md:w-1/4">
+          <p className="mb-4 font-semibold text-[var(--text-dark)]">
+            Stay updated with our latest projects!
+          </p>
+          <form className="flex flex-col gap-3">
+            <input
+              type="email"
+              placeholder="Your email"
+              className="border border-[var(--border-color)] bg-[var(--bg-medium)] text-[var(--text-dark)] px-3 py-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-[var(--accent)]"
+            />
+            <button
+              type="submit"
+              className="px-6 py-3 font-bold text-white rounded-xl shadow-lg 
+                         bg-[var(--primary)] hover:bg-[var(--primary-light)] 
+                         transform hover:scale-105 transition-all duration-300"
+            >
+              Subscribe
+            </button>
+          </form>
+        </div>
       </div>
-      <hr className='border m-6'/>
-    </div>
-  )
+              
+      {/* === Divider and Copyright === */}
+      <div className="border-t border-[var(--border-color)] text-center py-5 text-[var(--text-light)] text-sm">
+        © {new Date().getFullYear()} QuizTech. All rights reserved.
+      </div>
+    </footer>
+  );
 }

@@ -1,7 +1,24 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom';
 export default function Forgetpassword() {
      const navigate = useNavigate();
+     const email = useParams();
+     const [user, setUser] = useState(null)
+
+     useEffect(() =>{
+      if(email)return;
+      const fetchUser = async () => {
+        try{
+          const res = await axios.get("", );
+          const foundUser = res.data.userDetails.find((u) => u.email === email)
+          setUser(foundUser)
+        }catch (e) {
+          console.log("Error fetching user:", error.response?.data || error.message)
+        }
+      }
+      fetchUser()
+     },[email])
 
      const toggleToLogin = () => {
         navigate('/login')
