@@ -118,7 +118,7 @@ export default function Register() {
             <button
               type="submit"
               disabled={loading}
-              className="p-3 rounded-2xl text-lg bg-blue-600 text-white hover:bg-blue-700 transition"
+              className="p-3 rounded-2xl text-lg btn text-white hover:bg-blue-700 transition"
             >
               {loading ? 'Registering...' : 'Register'}
             </button>

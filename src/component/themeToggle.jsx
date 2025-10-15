@@ -8,7 +8,7 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="flex items-center gap-2 px-4 py-2 rounded-xl shadow-custom bg-button-gradient text-text-dark 
+      className="flex items-center gap-2 px-4 py-2 rounded-xl shadow-custom btn text-text-dark 
                  hover:shadow-glow transition-all duration-500 ease-in-out 
                  transform hover:scale-105 active:scale-95"
     >

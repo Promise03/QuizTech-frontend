@@ -22,7 +22,7 @@ export default function DocumentsAdmin() {
 
   const fetchDocs = async () => {
     try {
-      const res = await axios.get(`${BASE_URL}/getdoc`);
+      const res = await axios.get(`${BASE_URL}/alldoc`);
       setDocs(res.data);
     } catch (err) {
       console.error(err);

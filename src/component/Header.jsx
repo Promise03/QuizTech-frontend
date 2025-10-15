@@ -11,10 +11,10 @@ export default function Header() {
         <ul className='flex gap-19 items-center'>
             <Link to="/"><li>Home</li></Link>
             <Link to="/about"><li>About</li></Link>
-            <Link><li>FAQ</li></Link>
+            {/* <Link to="/"><li>FAQ</li></Link> */}
             <Link to='/contact'><li>Contact</li></Link>
             <Link to="/Login"><li>login</li></Link>
-              <ThemeToggle/>
+              <ThemeToggle />
         </ul>
       </nav>
     </header>

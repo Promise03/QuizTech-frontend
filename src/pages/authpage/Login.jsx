@@ -78,7 +78,7 @@ export default function Login() {
         p-3 rounded-2xl text-lg text-white font-serif
         ${loading 
             ? 'bg-gray-500 cursor-not-allowed' // Use a muted color and change cursor when loading
-            : 'bg-blue-300 hover:bg-blue-500'   // Original colors
+            : 'btn'   // Original colors
         }
     `}
 >
