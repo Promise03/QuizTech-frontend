@@ -5,15 +5,19 @@ import "react-toastify/dist/ReactToastify.css";
 
 export default function DocumentsAdmin() {
   const [docs, setDocs] = useState([]);
+  
+  // 💥 FIX 1: ADD 'videoUrl' to the initial state 💥
   const [form, setForm] = useState({
     title: "",
     summary: "",
     category: "",
-    link: ""
+    link: "",
+    videoUrl: "" // REQUIRED BY JOI SCHEMA
   });
+  
   const [editingId, setEditingId] = useState(null);
 
-  const BASE_URL = "http://localhost:5002/api/documents";
+  const BASE_URL = "http://localhost:5002/api/documents"; 
 
   // 🧭 Fetch all documents
   useEffect(() => {
@@ -22,7 +26,7 @@ export default function DocumentsAdmin() {
 
   const fetchDocs = async () => {
     try {
-      const res = await axios.get(`${BASE_URL}/alldoc`);
+      const res = await axios.get(`${BASE_URL}/alldoc`); 
       setDocs(res.data);
     } catch (err) {
       console.error(err);
@@ -41,19 +45,28 @@ export default function DocumentsAdmin() {
 
     try {
       if (editingId) {
-        await axios.put(`${BASE_URL}/updatedoc/${editingId}`, form);
+        // Update document
+        await axios.patch(`${BASE_URL}/updatedoc/${editingId}`, form); 
         toast.success("Document updated successfully!");
       } else {
-        await axios.post(`${BASE_URL}/createdoc`, form);
+        // Create document
+        await axios.post(`${BASE_URL}/createdoc`, form); 
         toast.success("Document created successfully!");
       }
 
-      setForm({ title: "", summary: "", category: "", link: "" });
+      // 💥 FIX 2: RESET 'videoUrl' after successful submission 💥
+      setForm({ title: "", summary: "", category: "", link: "", videoUrl: "" });
       setEditingId(null);
       fetchDocs();
     } catch (err) {
-      console.error(err);
-      toast.error("Error saving document");
+      console.error("Submission Error:", err.response ? err.response.data : err.message);
+      
+      // Use the specific error message from the backend if available
+      const errorMessage = err.response && err.response.data && err.response.data.message 
+                          ? err.response.data.message 
+                          : "Error saving document (Check server logs)";
+
+      toast.error(errorMessage);
     }
   };
 
@@ -66,7 +79,7 @@ export default function DocumentsAdmin() {
   // 🗑️ Delete handler
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`${BASE_URL}/deletedoc/${id}`);
+      await axios.delete(`${BASE_URL}/deletedoc/${id}`); 
       toast.success("Document deleted!");
       fetchDocs();
     } catch (err) {
@@ -77,7 +90,8 @@ export default function DocumentsAdmin() {
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">
-      <ToastContainer />
+      <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
+      
       <h1 className="text-3xl font-bold text-center text-blue-600 mb-6">
         📘 Document Management
       </h1>
@@ -116,16 +130,29 @@ export default function DocumentsAdmin() {
           <option value="Backend">Backend</option>
           <option value="Fullstack">Fullstack</option>
           <option value="DevOps">DevOps</option>
+          {/* Note: If your backend has more categories, add them here! */}
         </select>
         <input
           type="text"
           name="link"
-          placeholder="Document Link"
+          placeholder="Document Link (URL)"
           value={form.link}
           onChange={handleChange}
           className="w-full border p-2 mb-3 rounded-md"
           required
         />
+        
+        {/* 💥 FIX 3: ADD THE MISSING INPUT FIELD 💥 */}
+        <input
+          type="text"
+          name="videoUrl" 
+          placeholder="Video URL (e.g., YouTube embed)"
+          value={form.videoUrl}
+          onChange={handleChange}
+          className="w-full border p-2 mb-3 rounded-md"
+          required
+        />
+
         <button
           type="submit"
           className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
@@ -156,7 +183,15 @@ export default function DocumentsAdmin() {
                   rel="noreferrer"
                   className="text-blue-500 hover:underline"
                 >
-                  View
+                  View Doc
+                </a>
+                <a
+                  href={doc.videoUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-purple-500 hover:underline"
+                >
+                  View Video
                 </a>
                 <button
                   onClick={() => handleEdit(doc)}
