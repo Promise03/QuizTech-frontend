@@ -49,9 +49,8 @@ const QuizzesPage = () => {
 
     return (
         <div className="flex">
-            <UserSidebar />
             <div className="flex-1 flex flex-col overflow-auto">
-                <Header />
+ 
                 <div className="p-10">
                     <header className="flex items-center space-x-3 mb-6">
                         <Trophy size={32} className="text-yellow-500" />

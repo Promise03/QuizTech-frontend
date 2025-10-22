@@ -91,14 +91,22 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    logout: (state) => {
-      state.user = null;
-      state.token = null;
-      state.tempToken = null;
-      state.otpPending = false;
-      localStorage.removeItem("token");
-      localStorage.removeItem("tempToken");
-    },
+logout: (state) => {
+  state.user = null;
+  state.token = null;
+  state.tempToken = null;
+  state.email = null;
+  state.otpPending = false;
+  state.loading = false;
+  state.error = null;
+  state.message = null;
+
+  // 🧹 Clear all related items from localStorage
+  localStorage.removeItem("token");
+  localStorage.removeItem("tempToken");
+  localStorage.removeItem("user");
+},
+
     clearAuthMessage: (state) => {
       state.message = null;
       state.error = null;

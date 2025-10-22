@@ -7,8 +7,13 @@ const Contact = () => {
   return (
     <>
       <Header/>
+        <div className='h-screen contact-hero flex items-center justify-center  '>
+          <div className='text-center max-w-2xl'>
+            <h1 className="text-6xl font-extrabold  leading-tight mb-4">Contact Us</h1>
+          </div>
+        </div>
        <div className="min-h-screen contact px-8 py-20">
-      <div className="container mx-auto max-w-4xl bg-white p-12 rounded-2xl shadow-xl con-card">
+      <div className="container mx-auto max-w-4xl  p-12 rounded-2xl shadow-xl con-card">
         <h2 className="text-5xl font-extrabold text-center text-indigo-900 mb-12">Get in Touch</h2>
         <div className="grid md:grid-cols-2 gap-12 ">
           {/* Contact Form */}

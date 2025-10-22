@@ -11,6 +11,8 @@ import {
   Menu,
   X,
 } from "lucide-react";
+import { useDispatch } from "react-redux";
+import { logout } from "../../redux/Slice/LoginSlice";
 
 // The component now accepts 'open', 'toggle', and 'closeOnMobile' as props.
 const AdminSidebar = ({ open, toggle, closeOnMobile }) => {
@@ -21,6 +23,11 @@ const AdminSidebar = ({ open, toggle, closeOnMobile }) => {
     { name: "Analytics", icon: BarChart, path: "/admin/analytics" },
     { name: "Document", icon: Book, path: "/admin/document" },
   ];
+
+  const dispatch = useDispatch()
+  const handleLogout = () => {
+    dispatch(logout())
+  }
 
   return (
     <>
@@ -98,7 +105,8 @@ const AdminSidebar = ({ open, toggle, closeOnMobile }) => {
         {/* === LOGOUT BUTTON === */}
         <div className="border-t border-indigo-700 p-4 flex justify-center items-center">
           <NavLink
-            to="/logout"
+            to="/login"
+            onClick={handleLogout}
             className="flex items-center gap-3 px-4 py-3 rounded-xl text-red-300 hover:bg-red-700/40 hover:text-red-200 transition-all duration-200"
           >
             <LogOut size={22} className="shrink-0" />

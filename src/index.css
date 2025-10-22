@@ -20,11 +20,100 @@
   --nav-bg: rgba(15, 20, 30, 0.95);
   --border-color: #1e3a5f;
 
+  --primary-rgb: 30, 136, 229;   /* matches #1e88e5 */
+  --accent-rgb: 0, 229, 255;     /* matches #00e5ff */
+
   --glow-color: rgba(0, 229, 255, 0.6); /* Cyan glow */
   --button-gradient: linear-gradient(135deg, #1e88e5 0%, #00e5ff 100%);
   --shadow: 0 4px 12px rgba(0, 229, 255, 0.15),
              0 2px 8px rgba(0, 0, 0, 0.4);
 }
+/* === 🧭 GLOBAL SCROLL SETTINGS === */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-y: auto;
+  overflow-x: hidden;
+  /* background-color: var(--bg-light);
+  color: var(--text-dark); */
+}
+
+/* === 🌈 CUSTOM SCROLLBAR (Default / Dark Mode) === */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-medium);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 10px;
+  box-shadow: inset 0 0 5px var(--glow-color);
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-light);
+}
+
+/* === ☀️ Light Mode Scrollbar Override === */
+.light-mode ::-webkit-scrollbar-track {
+  background: var(--bg-medium);
+}
+
+.light-mode ::-webkit-scrollbar-thumb {
+  background: var(--primary-dark);
+  box-shadow: inset 0 0 5px var(--glow-color);
+}
+
+.light-mode ::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+/* === 💻 For Firefox === */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary) var(--bg-medium);
+}
+
+.light-mode html {
+  scrollbar-color: var(--primary-dark) var(--bg-medium);
+}
+
+/* === 📱 Optional: Hide scrollbar on mobile === */
+@media (max-width: 768px) {
+  ::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* === Utility Class for Scrollable Sections === */
+.scroll-section {
+  max-height: 100vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary) var(--bg-medium);
+}
+
+/* === 🔝 Scroll To Top Button === */
+.scroll-top-btn {
+  background: var(--button-gradient);
+  color: white;
+  border: none;
+  box-shadow: 0 0 20px var(--glow-color);
+  transition: all 0.3s ease;
+}
+
+.scroll-top-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 0 25px var(--glow-color);
+}
+
 
 /* === ☀️ LIGHT MODE === */
 .light-mode {
@@ -45,6 +134,9 @@
 
   --nav-bg: rgba(255, 255, 255, 0.95);
   --border-color: #cfd8dc;
+
+   --primary-rgb: 25, 118, 210;   /* matches #1976d2 */
+  --accent-rgb: 0, 188, 212;     /* matches #00bcd4 */
 
   --glow-color: rgba(25, 118, 210, 0.4);
   --button-gradient: linear-gradient(135deg, #1976d2 0%, #00bcd4 100%);
@@ -77,14 +169,90 @@
 .Hero {
   background: 
     linear-gradient(
-      rgba(10, 20, 30, 0.3),
-      rgba(0, 0, 0, 0.5)
+      rgba(10, 20, 30, 0.6),
+      rgba(0, 0, 0, 0.7)
+    ),
+    var(--bg-light);
+  background-image:
+    linear-gradient(
+      to bottom right,
+      rgba(var(--primary-rgb), 0.3),
+      rgba(var(--accent-rgb), 0.2)
     ),
     url(/about1.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  color: var(--text-light);
+  color: var(--text-dark);
+  box-shadow: inset 0 0 50px rgba(0, 229, 255, 0.15);
+  transition: background  0.4s ease, color 0.4s ease;
+}
+
+.Hero h1, .contact-hero h1 {
+  font-weight: 800;
+  font-size: 4rem; /* You can adjust this */
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* text-fill-color: transparent; */
+  background-clip: text;
+  animation: shine 5s ease-in-out infinite alternate;
+}
+
+/* Optional animated shimmer effect */
+@keyframes shine {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+
+.contact-hero{
+  background: 
+    linear-gradient(
+      rgba(10, 20, 30, 0.6),
+      rgba(0, 0, 0, 0.7)
+    ),
+    var(--bg-light);
+  background-image:
+    linear-gradient(
+      to bottom right,
+      rgba(var(--primary-rgb), 0.2),
+      rgba(var(--accent-rgb), 0.5)
+    ),
+    url(/download.jpeg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: var(--text-dark);
+  box-shadow: inset 0 0 50px rgba(0, 229, 255, 0.15);
+  transition: background  0.4s ease, color 0.4s ease;
+}
+
+
+.about-hero{
+  background: 
+    linear-gradient(
+      rgba(10, 20, 30, 0.6),
+      rgba(0, 0, 0, 0.7)
+    ),
+    var(--bg-light);
+  background-image:
+    linear-gradient(
+      to bottom right,
+      rgba(var(--primary-rgb), 0.2),
+      rgba(var(--accent-rgb), 0.5)
+    ),
+    url(/about2.jpeg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: var(--text-dark);
+  box-shadow: inset 0 0 50px rgba(0, 229, 255, 0.15);
+  transition: background  0.4s ease, color 0.4s ease;
 }
 
 
@@ -92,7 +260,7 @@
   background-color: var(--bg-medium);
   color: var(--text-light);
 }
-.about h3, h4, p, .contact h2, h3 {
+.about h3 h4 p .contact h2 h3 {
   color: var(--text-dark);
 }
 .abt-card, .con-card{
@@ -137,8 +305,8 @@
   border: 1px solid var(--border-color);
 }
 
-.contact-content span,
-input,
+.contact-content span
+input
 label {
   color: var(--text-light);
 }

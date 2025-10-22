@@ -7,6 +7,11 @@ const About = () => {
   return (
     <>
      <Header/>
+     <div className='h-screen about-hero flex items-center justify-center  '>
+          <div className='text-center max-w-2xl'>
+            <h1 className="text-6xl font-extrabold  leading-tight mb-4">Contact Us</h1>
+          </div>
+        </div>
      <div className="min-h-screen about  px-8 py-20">
       <div className="container mx-auto">
         <h2 className="text-5xl font-extrabold text-center text-indigo-900 mb-12">About Us</h2>

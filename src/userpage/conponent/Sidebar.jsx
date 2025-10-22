@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import {
   LayoutDashboard,
   History,
@@ -8,9 +8,11 @@ import {
   Settings,
   LogOut,
 } from 'lucide-react';
+import { useDispatch } from 'react-redux';
+import { logout } from '../../redux/Slice/LoginSlice';
 
 const UserSidebar = () => {
-  // A helper function to define link styles based on whether it's active
+  // Define link style based on whether it's active
   const linkClasses = ({ isActive }) =>
     `flex items-center space-x-3 p-3 rounded-lg transition-colors duration-200 ${
       isActive
@@ -18,8 +20,17 @@ const UserSidebar = () => {
         : 'text-gray-600 hover:bg-gray-100 hover:text-indigo-700'
     }`;
 
+    // logout
+    const dispatch = useDispatch()
+    const navigate = useNavigate
+
+    const handleLogout = () => {
+      dispatch(logout());
+      navigate("/login")
+    }
+
   return (
-    <div className="w-64 bg-white shadow-lg text-gray-800 flex flex-col p-6 min-h-screen">
+    <div className="w-64 bg-white shadow-lg text-gray-800 flex flex-col p-6 min-h-screen fixed top-0">
       {/* === User Profile Section === */}
       <div className="flex items-center space-x-3 mb-10">
         <img
@@ -35,32 +46,32 @@ const UserSidebar = () => {
 
       {/* === Navigation Links === */}
       <nav className="flex-1 space-y-2">
-        <NavLink to="/userdashboard" className={linkClasses}>
+        <NavLink to="/user" end className={linkClasses}>
           <LayoutDashboard size={24} />
           <span>Dashboard</span>
         </NavLink>
 
-        <NavLink to="/quizzes" className={linkClasses}>
+        <NavLink to="/user/quizzes" className={linkClasses}>
           <Trophy size={24} />
           <span>Quizzes</span>
         </NavLink>
 
-        <NavLink to="/history" className={linkClasses}>
+        <NavLink to="/user/history" className={linkClasses}>
           <History size={24} />
           <span>Quiz History</span>
         </NavLink>
 
-        <NavLink to="/achievements" className={linkClasses}>
+        <NavLink to="/user/achievements" className={linkClasses}>
           <Trophy size={24} />
           <span>Achievements</span>
         </NavLink>
 
-        <NavLink to="/document" className={linkClasses}>
+        <NavLink to="/user/document" className={linkClasses}>
           <FileText size={24} />
           <span>Documents</span>
         </NavLink>
 
-        <NavLink to="/settings" className={linkClasses}>
+        <NavLink to="/user/settings" className={linkClasses}>
           <Settings size={24} />
           <span>Settings</span>
         </NavLink>
@@ -69,7 +80,8 @@ const UserSidebar = () => {
       {/* === Logout === */}
       <div className="mt-auto">
         <NavLink
-          to="/logout"
+          to="/login" 
+          onClick={handleLogout}
           className={({ isActive }) =>
             `flex items-center space-x-3 p-3 rounded-lg transition-colors duration-200 ${
               isActive

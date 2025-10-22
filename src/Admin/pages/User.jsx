@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Search, Filter, Users } from "lucide-react";
+import { Search, Filter, Users, Trash2, CheckCircle2, AlertTriangle } from "lucide-react";
 
 const UsersPage = () => {
   const [users, setUsers] = useState([]);
@@ -8,16 +8,13 @@ const UsersPage = () => {
   const [search, setSearch] = useState("");
   const [roleFilter, setRoleFilter] = useState("all");
   const [loading, setLoading] = useState(true);
+  const [modal, setModal] = useState({ show: false, type: "", message: "" });
 
-  // ✅ Fetch users from backend
-  useEffect(() => {
+  // ✅ Fetch users
   const fetchUsers = async () => {
     try {
       const res = await axios.get("http://localhost:5002/api/users/alluser");
-
-      // ✅ Extract the array correctly
       const usersArray = res.data.userDetails || [];
-
       setUsers(usersArray);
       setFiltered(usersArray);
     } catch (error) {
@@ -27,20 +24,16 @@ const UsersPage = () => {
     }
   };
 
-  fetchUsers();
-}, []);
+  useEffect(() => {
+    fetchUsers();
+  }, []);
 
-
-  // 🔍 Search + Filter logic
+  // 🔍 Search & filter
   useEffect(() => {
     let data = users;
-
-    // Filter by role
     if (roleFilter !== "all") {
       data = data.filter((u) => u.role?.toLowerCase() === roleFilter);
     }
-
-    // Search by name or email
     if (search.trim() !== "") {
       data = data.filter(
         (u) =>
@@ -48,12 +41,33 @@ const UsersPage = () => {
           u.email?.toLowerCase().includes(search.toLowerCase())
       );
     }
-
     setFiltered(data);
   }, [search, roleFilter, users]);
 
+  // 🗑️ Delete user
+  const handleDelete = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this user?")) return;
+    try {
+      await axios.delete(`http://localhost:5002/api/users/delete/${id}`);
+      setModal({
+        show: true,
+        type: "success",
+        message: "User deleted successfully!",
+      });
+      fetchUsers();
+    } catch (error) {
+      console.error("Error deleting user:", error);
+      setModal({
+        show: true,
+        type: "error",
+        message: "Failed to delete user.",
+      });
+    }
+  };
+
   return (
-    <div className="bg-white shadow-md rounded-2xl p-6">
+    <div className="bg-white shadow-md rounded-2xl p-6 relative">
+      {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6 gap-4">
         <div>
           <h1 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
@@ -104,7 +118,7 @@ const UsersPage = () => {
                 <th className="p-3">Name</th>
                 <th className="p-3">Email</th>
                 <th className="p-3">Role</th>
-                <th className="p-3">Created At</th>
+                <th className="p-3 text-center">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -126,13 +140,41 @@ const UsersPage = () => {
                       {user.role}
                     </span>
                   </td>
-                  <td className="p-3 text-gray-500">
-                    {new Date(user.createdAt).toLocaleDateString()}
+                 
+                  <td className="p-3 flex justify-center">
+                    <button
+                      onClick={() => handleDelete(user._id)}
+                      className="text-red-600 hover:text-red-800"
+                    >
+                      <Trash2 size={18} />
+                    </button>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
+        </div>
+      )}
+
+      {/* ✅ Reusable Success/Error Modal */}
+      {modal.show && (
+        <div className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50">
+          <div className="bg-white rounded-xl p-6 shadow-lg flex flex-col items-center gap-3">
+            {modal.type === "success" ? (
+              <CheckCircle2 className="text-green-500" size={40} />
+            ) : (
+              <AlertTriangle className="text-red-500" size={40} />
+            )}
+            <p className="text-gray-700 text-center">{modal.message}</p>
+            <button
+              onClick={() => setModal({ show: false, type: "", message: "" })}
+              className={`px-4 py-2 rounded-lg text-white ${
+                modal.type === "success" ? "bg-green-600" : "bg-red-600"
+              }`}
+            >
+              OK
+            </button>
+          </div>
         </div>
       )}
     </div>

@@ -26,14 +26,37 @@ import AdminAnalytics from "./Admin/pages/Analytics"
 import DocumentsAdmin from "./Admin/pages/Document"
 import VerifyOtp from "./pages/authpage/otp"
 import QuizStarter from "./userpage/pages/starterpage"
+import { useState, useEffect } from "react"
+import LoadingScreen from "./component/loadingSping"
+import ProtectedRoute from "./route/protectedRoute"
+import Unauthorized from "./pages/Unauthorized"
+import ScrollToTop from "./component/ScrollToTop"
+import NotFound from "./pages/NotFound"
+import UserLayout from "./userpage/userLayout"
+
+// import ScrollZoomWrapper from "./component/ScrollZoomWrapper"
 
 
 
 function App() {
+const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    // Simulate loading duration or wait for real data
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2500); // 2.5 seconds
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return <LoadingScreen />;
+  }
 
   return (
    <>
+   <ScrollToTop/>
 <Routes>
   <Route path="/" element={<Home/>}></Route>
 <Route path="/login" element={<Login/>}></Route>
@@ -43,36 +66,47 @@ function App() {
 <Route path="/changePassword" element={<Changepassword/>}></Route>
 <Route path="/about" element={<About/>}></Route>
   <Route path="/contact" element={<Contact/>}></Route>
-  <Route path="/*" element={<Home/>}></Route>
   <Route path="/verify-otp" element={<VerifyOtp/>}></Route>
+    <Route path="/*" element={<NotFound/>}></Route>
+    {/* ✅ unauthorized page (can stay here or outside if global) */}
+    <Route path="unauthorized" element={<Unauthorized />} />
 
 
 
 
 
 
-{/* userRoute */}
-{/* <Route path="/welcome" element={<Welcome/>}></Route> */}
-{/* <Route path="/good" element={<Good/>}></Route> */}
-{/* <Route path="/group" element={<Group/>}></Route> */}
-<Route path="/userDashboard" element={<UserDashboard/>}></Route>
-<Route path="/Document" element={<DocumentPage/>}></Route>
-<Route path="/quizzes" element={<QuizzesPage/>}></Route>
-<Route path="/Settings" element={<SettingsPage/>}></Route>
-<Route path="/achievements" element={<AchievementsPage/>}></Route>
-<Route path="/history" element={<QuizHistoryPage/>}></Route>
+
+{/* ✅ userRoute */}
+<Route element={<ProtectedRoute allowedRoles={["Student"]} />}>
+  <Route path="/user" element={<UserLayout />}>
+    {/* index = /user */}
+    <Route index element={<UserDashboard />} />
+
+    {/* ✅ nested routes (relative paths) */}
+    <Route path="document" element={<DocumentPage />} />
+    <Route path="quizzes" element={<QuizzesPage />} />
+    <Route path="settings" element={<SettingsPage />} />
+    <Route path="achievements" element={<AchievementsPage />} />
+    <Route path="history" element={<QuizHistoryPage />} />
+
+    
+  </Route>
+</Route>
 
 
 
 
 
   {/* Admin Routes */}
+  <Route element={<ProtectedRoute allowedRoles={["Admin"]}/>}>
       <Route path="/admin" element={<AdminLayout />}>
         <Route index element={<AdminDashboard />} />
         <Route path="users" element={<UsersPage />} />
         <Route path="quizzes" element={<AdminQuizzes />} />
         <Route path="analytics" element={<AdminAnalytics />} />
         <Route path="document" element={<DocumentsAdmin/>} />
+      </Route>
       </Route>
 
 </Routes>
@@ -83,22 +117,3 @@ function App() {
 export default App
 
 
-// // import ThemeToggle from './component/themeToggle';
-
-// // function App() {
-// //   return (
-// //     <div className="min-h-screen bg-bg-light text-text-dark flex flex-col items-center justify-center transition-colors duration-500">
-// //       <h1 className="text-3xl font-bold text-primary mb-6">
-// //         Pink + Purple Theme 🌸
-// //       </h1>
-
-// //       <ThemeToggle />
-
-// //       <div className="mt-8 p-6 bg-card-bg border border-border-color shadow-custom rounded-2xl transition-colors duration-500">
-// //         <p className="text-text-light">This card switches theme colors.</p>
-// //       </div>
-// //     </div>
-// //   );
-// // }
-
-// export default App;

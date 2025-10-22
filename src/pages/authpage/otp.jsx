@@ -27,7 +27,7 @@ useEffect(() => {
             setTimeout(() => {
               if (user && user.role) { 
             if (user.role === "Admin") navigate("/admin");
-            else navigate("/userDashboard");
+            else navigate("/user");
                   }
             }, 1000);
         }

@@ -69,7 +69,7 @@ export default function Contact() {
                             <textarea  placeholder="Your Message" className='min-h-38 w-full px-3 py-3.5 rounded-sm text-[16px] border border-[#ddd]'></textarea>
                         </div>
                         
-                        <button type="submit" className=''>Send Message</button>
+                        <button type="submit" className='btn'>Send Message</button>
                     </form>
                 </div>
             </div>

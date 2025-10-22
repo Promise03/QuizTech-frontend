@@ -2,11 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { FileText, Hourglass, ArrowRight } from 'lucide-react';
 import axios from 'axios';
+import { useSelector } from "react-redux";
+
 
 const QuizStarter = () => {
     // 1. Get the quizId from the URL parameters
     const { quizId } = useParams(); 
     const navigate = useNavigate();
+    const { user, token } = useSelector((state) => state.login);
+
     
     // State for data fetching
     const [quiz, setQuiz] = useState(null);
@@ -75,19 +79,54 @@ const QuizStarter = () => {
         }
     };
     
-    // Handle quiz submission (simple client-side scoring for demonstration)
-    const handleSubmitQuiz = () => {
-        let finalScore = 0;
-        quiz.questions.forEach((q, index) => {
-            const userAnswer = userAnswers[quizId]?.[index];
-            if (userAnswer && userAnswer === q.correctAnswer) {
-                finalScore += 1;
-            }
-        });
+const handleSubmitQuiz = async () => {
+  let finalScore = 0;
 
-        setScore(finalScore);
-        setIsSubmitted(true);
+  quiz.questions.forEach((q, index) => {
+    const userAnswer = userAnswers[quizId]?.[index];
+    if (userAnswer && userAnswer === q.correctAnswer) {
+      finalScore += 1;
+    }
+  });
+
+  setScore(finalScore);
+  setIsSubmitted(true);
+
+  try {
+    const payload = {
+      quizId,
+      userId: user?._id || "672b1d2exampleid", // ✅ uses logged-in user's ID
+      score: finalScore,
+      totalQuestions: quiz.questions.length,
     };
+
+    console.log("🟢 Sending Quiz Submission:", payload);
+
+    // ✅ Get JWT token from localStorage
+    // const token = localStorage.getItem("token");
+
+    const res = await fetch("http://localhost:5002/api/quiz/submit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`, // ✅ Add token here
+      },
+      body: JSON.stringify(payload),
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      console.log("✅ Quiz submitted successfully:", data);
+    } else {
+      console.error("❌ Quiz submission failed:", data.message || data);
+    }
+  } catch (err) {
+    console.error("⚠️ Error submitting quiz:", err);
+  }
+};
+
+
 
     // Loading and Error States
     if (loading) {
