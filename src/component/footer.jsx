@@ -11,9 +11,12 @@ export default function Footer() {
           <h1 className="text-3xl font-semibold mb-3 font-serif text-[var(--primary-light)]">
             QuizTech
           </h1>
-          <p className="text-[var(--text-light)] leading-relaxed">
-            Enzzyme Capital Partners, a fund manager with 50+ years of collective VC experience, has propelled over 100 organizations, weaving innovation into Africa's business fabric, and managing $20M+ in VC Funds. Join us in shaping the future.
-          </p>
+         <p className="text-[var(--text-light)] leading-relaxed">
+  At QuizTech, our mission is to make learning engaging, accessible, and rewarding for everyone. 
+  We believe knowledge should inspire curiosity, not boredom — that’s why we create fun, interactive quizzes 
+  that challenge minds and spark growth. Join us in redefining how the world learns, one question at a time.
+</p>
+
         </div>
 
         {/* === Quick Links === */}

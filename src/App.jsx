@@ -99,7 +99,7 @@ const [loading, setLoading] = useState(true);
 
 
   {/* Admin Routes */}
-  <Route element={<ProtectedRoute allowedRoles={["Admin"]}/>}>
+  {/* <Route element={<ProtectedRoute allowedRoles={["Admin"]}/>}> */}
       <Route path="/admin" element={<AdminLayout />}>
         <Route index element={<AdminDashboard />} />
         <Route path="users" element={<UsersPage />} />
@@ -107,7 +107,7 @@ const [loading, setLoading] = useState(true);
         <Route path="analytics" element={<AdminAnalytics />} />
         <Route path="document" element={<DocumentsAdmin/>} />
       </Route>
-      </Route>
+      {/* </Route> */}
 
 </Routes>
    </>

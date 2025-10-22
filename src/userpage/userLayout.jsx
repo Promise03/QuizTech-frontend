@@ -7,6 +7,7 @@ const UserLayout = () => {
   const [open, setOpen] = useState(window.innerWidth >= 1024);
 
   const toggle = () => setOpen((prev) => !prev);
+
   const closeOnMobile = () => {
     if (window.innerWidth < 1024) setOpen(false);
   };
@@ -22,21 +23,17 @@ const UserLayout = () => {
 
   return (
     <div className="flex bg-gray-50 min-h-screen">
-      {/* === Sidebar === */}
       <UserSidebar open={open} toggle={toggle} closeOnMobile={closeOnMobile} />
 
-      {/* === Main Content === */}
       <div
-        className={`flex-1 flex flex-col transition-all duration-300 ease-in-out 
-          ${open ? "lg:ml-64" : "lg:ml-"} 
+        className={`flex-1 flex flex-col transition-all duration-300 ease-in-out
+          ${open ? "lg:ml-64" : "lg:ml-0"}
           mt-0 lg:mt-0 overflow-hidden
         `}
       >
-        <div className="p-0 ">
-          <Header title="User Dashboard" />
-          <div className="mt-16">
-            <Outlet />
-          </div>
+        <Header title="User Dashboard" toggleSidebar={toggle} />
+        <div className="mt-16 p-4">
+          <Outlet />
         </div>
       </div>
     </div>

@@ -1,14 +1,31 @@
-import React from 'react';
-import { Settings } from 'lucide-react';
+import React from "react";
+import { Menu } from "lucide-react";
 
-const AdminHeader = ({ title = "Dashboard" }) => {
+const AdminHeader = ({ title = "Admin Dashboard", sidebarOpen, toggleSidebar }) => {
   return (
-    <header className="flex justify-between items-center p-6 bg-white fixed w-full top-0 z-50 ">
-      <h1 className="text-4xl font-bold text-gray-900">{title}</h1>
-      {/* <div className="flex items-center space-x-4">
-        <span className="text-gray-600">Welcome, Admin</span>
-        <img src="https://via.placeholder.com/40" alt="Admin Profile" className="rounded-full"/>
-      </div> */}
+    <header
+      className={`fixed top-0 right-0 bg-white shadow-md flex items-center justify-between px-4 py-4.5 lg:px-8 z-40 transition-all duration-300 ease-in-out
+        ${sidebarOpen ? "lg:ml-64 lg:w-[calc(100%-16rem)] ml-0" : "w-full "}
+      `}
+    >
+      {/* === Left: Toggle + Title === */}
+      <div className="flex items-center space-x-3">
+        {/* Mobile Toggle Button */}
+        <button
+          onClick={toggleSidebar}
+          className="p-2 rounded-md hover:bg-gray-100 transition-colors duration-200 lg:hidden"
+        >
+          <Menu className="w-6 h-6 text-gray-700" />
+        </button>
+
+        {/* Title */}
+        <h1 className="text-2xl md:text-3xl font-bold text-gray-900">{title}</h1>
+      </div>
+
+      {/* === Right: Profile / Actions === */}
+      <div className="hidden lg:flex items-center space-x-4">
+        <div className="text-gray-700 font-medium">Admin</div>
+      </div>
     </header>
   );
 };

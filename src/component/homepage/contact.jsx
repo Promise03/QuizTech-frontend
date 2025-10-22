@@ -1,81 +1,109 @@
-import React from 'react'
-import {Phone, Map, MessagesSquare } from 'lucide-react';
+import React from "react";
+import { Phone, MapPin, MessageSquare } from "lucide-react";
 
 export default function Contact() {
   return (
-    <div className='py-20 px-0 contact-content '>
-    
-    <section className='m-7'>
-        <div  >
-            <div className='text-center mb-12'>
-                <h2 className='text-4xl font-semibold mb-4 '>Get In Touch</h2>
-                <p className='max-w-150 mx-auto text-[#6c757d]'>Have questions or feedback? We'd love to hear from you!</p>
-            </div>
-            
-            <div className='flex gap-12'>
-                <div className='flex-1'>
-                    <h2 className='text-4xl mb-5'>Contact Us</h2>
-                    <p className='mb-7 text-[#6c757d]'>Our team is here to answer any questions you may have about QuizMaster. Reach out to us and we'll respond as soon as we can.</p>
-                    
-                    <div className='mb-7'>
-                        <div className='flex items-center mb-3.5 gap-4' >
-                          <Map className='text-indigo-600'/>
-                            <span>123 Quiz Street, Knowledge City, Edutopia</span>
-                        </div>
-                        
-                        <div className="flex items-center mb-3.5 gap-4">
-                          <Phone className='text-indigo-600'/>
-                            <span>+1 (555) 123-4567</span>
-                        </div>
-                        
-                        <div className="flex items-center mb-3.5 gap-4">
-                          <MessagesSquare className='text-indigo-600'/>
-                            <span>info@quizmaster.com</span>
-                        </div>
-                    </div>
-                    
-                    {/* <div className="">
-                         <a href="#" className="text-gray-500 hover:text-indigo-600 transition-colors duration-300">
-                  <Facebook size={32}/>
-                </a>
-                <a href="#" className="text-gray-500 hover:text-indigo-600 transition-colors duration-300">
-                  <Twitter size={32}/>
-                </a>
-                <a href="#" className="text-gray-500 hover:text-indigo-600 transition-colors duration-300">
-                  <Instagram size={32}/>
-                  </a>
-                    </div> */}
-                </div>
-                
-                <div className='flex-1'>
-                    <form>
-                        <div className='mb-5' >
-                            <label for="name" className='block mb-2'>Full Name</label>
-                            <input type="text"  placeholder="Your Name " className='w-full px-3 py-3.5 rounded-sm text-[16px] border-[#ddd] border'/>
-                        </div>
-                        
-                        <div >
-                            <label for="email" className='block mb-2'>Email Address</label>
-                            <input type="email"  placeholder="Your Email" className='w-full px-3 py-3.5 rounded-sm text-[16px] border-[#ddd] border'/>
-                        </div>
-                        
-                        <div >
-                            <label for="subject" className='block mb-2'>Subject</label>
-                            <input type="text"  placeholder="Subject" className='w-full px-3 py-3.5 rounded-sm text-[16px] border-[#ddd] border'/>
-                        </div>
-                        
-                        <div >
-                            <label for="message" className='block mb-2'>Message</label>
-                            <textarea  placeholder="Your Message" className='min-h-38 w-full px-3 py-3.5 rounded-sm text-[16px] border border-[#ddd]'></textarea>
-                        </div>
-                        
-                        <button type="submit" className='btn'>Send Message</button>
-                    </form>
-                </div>
-            </div>
+    <div className="py-20 px-6 md:px-16 bg-gray-900 text-white contact-content">
+      <section>
+        {/* Header Section */}
+        <div className="text-center mb-12">
+          <h2 className="text-4xl font-semibold mb-4 text-blue-400">
+            Get In Touch
+          </h2>
+          <p className="max-w-xl mx-auto text-gray-400">
+            Have questions or feedback? We'd love to hear from you!
+          </p>
         </div>
-        
-    </section>
+
+        {/* Main Content */}
+        <div className="flex flex-col md:flex-row gap-12">
+          {/* Contact Info */}
+          <div className="flex-1">
+            <h2 className="text-3xl mb-6 font-semibold">Contact Us</h2>
+            <p className="mb-8 text-gray-400 leading-relaxed">
+              Our team is here to answer any questions you may have about
+              QuizTech. Reach out to us and we'll respond as soon as we can.
+            </p>
+
+            <div className="space-y-5">
+              <div className="flex items-center gap-4">
+                <MapPin className="text-blue-500" />
+                <span>123 Quiz Street, Knowledge City, Edutopia</span>
+              </div>
+
+              <div className="flex items-center gap-4">
+                <Phone className="text-blue-500" />
+                <span>+1 (555) 123-4567</span>
+              </div>
+
+              <div className="flex items-center gap-4">
+                <MessageSquare className="text-blue-500" />
+                <span>info@quiztech.com</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Contact Form */}
+          <div className="flex-1 bg-gray-800 p-8 rounded-xl shadow-lg">
+            <form className="space-y-5">
+              <div>
+                <label htmlFor="name" className="block mb-2 text-gray-300">
+                  Full Name
+                </label>
+                <input
+                  id="name"
+                  type="text"
+                  placeholder="Your Name"
+                  className="w-full px-4 py-3 rounded-md bg-gray-900 border border-gray-700 text-white focus:ring-2 focus:ring-blue-500 outline-none"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="email" className="block mb-2 text-gray-300">
+                  Email Address
+                </label>
+                <input
+                  id="email"
+                  type="email"
+                  placeholder="Your Email"
+                  className="w-full px-4 py-3 rounded-md bg-gray-900 border border-gray-700 text-white focus:ring-2 focus:ring-blue-500 outline-none"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="subject" className="block mb-2 text-gray-300">
+                  Subject
+                </label>
+                <input
+                  id="subject"
+                  type="text"
+                  placeholder="Subject"
+                  className="w-full px-4 py-3 rounded-md bg-gray-900 border border-gray-700 text-white focus:ring-2 focus:ring-blue-500 outline-none"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="message" className="block mb-2 text-gray-300">
+                  Message
+                </label>
+                <textarea
+                  id="message"
+                  placeholder="Your Message"
+                  rows="5"
+                  className="w-full px-4 py-3 rounded-md bg-gray-900 border border-gray-700 text-white focus:ring-2 focus:ring-blue-500 outline-none"
+                ></textarea>
+              </div>
+
+              <button
+                type="submit"
+                className="w-full mt-3 bg-blue-600 hover:bg-blue-700 transition-all duration-300 rounded-md py-3 font-semibold text-white"
+              >
+                Send Message
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
     </div>
-  )
+  );
 }

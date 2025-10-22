@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
+import AdminHeader from "./Component/Header"
+import AdminSidebar from "./Component/Sidebar"
 import { Outlet } from "react-router-dom";
-import AdminHeader from "./Component/Header";
-import AdminSidebar from "./Component/Sidebar";
 
 const AdminLayout = () => {
   const [open, setOpen] = useState(window.innerWidth >= 1024);
 
-  const toggle = () => setOpen(!open);
+  const toggleSidebar = () => setOpen((prev) => !prev);
+
   const closeOnMobile = () => {
     if (window.innerWidth < 1024) setOpen(false);
   };
@@ -20,25 +21,25 @@ const AdminLayout = () => {
   }, []);
 
   return (
-    <div className="flex min-h-screen">
-      <AdminSidebar open={open} toggle={toggle} closeOnMobile={closeOnMobile} />
+    <div className="flex bg-gray-50 min-h-screen">
+      {/* === Sidebar === */}
+      <AdminSidebar open={open} toggle={toggleSidebar} closeOnMobile={closeOnMobile} />
 
-      {/* MAIN AREA */}
-      <main
-        className={`
-          flex-1 flex flex-col overflow-y-auto p-8
-          mt-0 lg:mt-16
-          transition-all duration-300 ease-in-out
-          ${open ? "lg:ml-64" : "lg:ml-20"}
-        `}
+      {/* === Main Content Area === */}
+      <div
+        className={`flex-1 flex flex-col transition-all duration-300 ease-in-out ${
+          open && window.innerWidth >= 1024 ? "lg:ml-64" : "ml-0"
+        }`}
       >
-        <div className="lg:p-0 p-8">
-          <AdminHeader />
-          <div className="mt-2">
-            <Outlet />
-          </div>
-        </div>
-      </main>
+        <AdminHeader
+          sidebarOpen={open}
+          toggleSidebar={toggleSidebar}
+        />
+
+        <main className="mt-16 p-6">
+          <Outlet />
+        </main>
+      </div>
     </div>
   );
 };

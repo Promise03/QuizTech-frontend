@@ -9,7 +9,7 @@ const About = () => {
      <Header/>
      <div className='h-screen about-hero flex items-center justify-center  '>
           <div className='text-center max-w-2xl'>
-            <h1 className="text-6xl font-extrabold  leading-tight mb-4">Contact Us</h1>
+            <h1 className="text-6xl font-extrabold  leading-tight mb-4">About Us</h1>
           </div>
         </div>
      <div className="min-h-screen about  px-8 py-20">
