@@ -7,7 +7,7 @@ export const loginUser = createAsyncThunk(
   async (credentials, { rejectWithValue }) => {
     try {
       const res = await axios.post(
-        "http://localhost:5002/api/auth/login",
+        "https://quiztech-backend.onrender.com/api/auth/login",
         credentials
       );
 
@@ -39,7 +39,7 @@ export const verifyOtp = createAsyncThunk(
         return rejectWithValue("Session expired. Please log in again.");
 
       const res = await axios.post(
-        "http://localhost:5002/api/verify-otp",
+        "https://quiztech-backend.onrender.com/api/verify-otp",
         { otp },
         { headers: { Authorization: `Bearer ${tempToken}` } }
       );

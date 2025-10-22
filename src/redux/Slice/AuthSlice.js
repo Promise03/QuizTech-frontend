@@ -6,7 +6,7 @@ export const registerUser = createAsyncThunk(
   "auth/registerUser",
   async (userData, { rejectWithValue }) => {
     try {
-      const res = await axios.post("http://localhost:5002/api/auth/register", userData);
+      const res = await axios.post("https://quiztech-backend.onrender.com/api/auth/register", userData);
       console.log("Backend response:", res.data);
       return res.data; // return full response (success, message, user)
     } catch (err) {
