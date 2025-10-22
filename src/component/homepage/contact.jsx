@@ -44,59 +44,59 @@ export default function Contact() {
           </div>
 
           {/* Contact Form */}
-          <div className="flex-1 bg-gray-800 p-8 rounded-xl shadow-lg">
+          <div className="flex-1 bg-gray-800 p-8 rounded-xl shadow-lg contact">
             <form className="space-y-5">
               <div>
-                <label htmlFor="name" className="block mb-2 text-gray-300">
+                <label htmlFor="name" className="block mb-2 ">
                   Full Name
                 </label>
                 <input
                   id="name"
                   type="text"
                   placeholder="Your Name"
-                  className="w-full px-4 py-3 rounded-md bg-gray-900 border border-gray-700 text-white focus:ring-2 focus:ring-blue-500 outline-none"
+                  className="w-full px-4 py-3 rounded-md  border focus:ring-2 focus:ring-blue-500 outline-none"
                 />
               </div>
 
               <div>
-                <label htmlFor="email" className="block mb-2 text-gray-300">
+                <label htmlFor="email" className="block mb-2 ">
                   Email Address
                 </label>
                 <input
                   id="email"
                   type="email"
                   placeholder="Your Email"
-                  className="w-full px-4 py-3 rounded-md bg-gray-900 border border-gray-700 text-white focus:ring-2 focus:ring-blue-500 outline-none"
+                  className="w-full px-4 py-3 rounded-md  border  focus:ring-2 focus:ring-blue-500 outline-none"
                 />
               </div>
 
               <div>
-                <label htmlFor="subject" className="block mb-2 text-gray-300">
+                <label htmlFor="subject" className="block mb-2 ">
                   Subject
                 </label>
                 <input
                   id="subject"
                   type="text"
                   placeholder="Subject"
-                  className="w-full px-4 py-3 rounded-md bg-gray-900 border border-gray-700 text-white focus:ring-2 focus:ring-blue-500 outline-none"
+                  className="w-full px-4 py-3 rounded-md border  focus:ring-2 focus:ring-blue-500 outline-none"
                 />
               </div>
 
               <div>
-                <label htmlFor="message" className="block mb-2 text-gray-300">
+                <label htmlFor="message" className="block mb-2 ">
                   Message
                 </label>
                 <textarea
                   id="message"
                   placeholder="Your Message"
                   rows="5"
-                  className="w-full px-4 py-3 rounded-md bg-gray-900 border border-gray-700 text-white focus:ring-2 focus:ring-blue-500 outline-none"
+                  className="w-full px-4 py-3 rounded-md  border   focus:ring-2 focus:ring-blue-500 outline-none"
                 ></textarea>
               </div>
 
               <button
                 type="submit"
-                className="w-full mt-3 bg-blue-600 hover:bg-blue-700 transition-all duration-300 rounded-md py-3 font-semibold text-white"
+                className="w-full mt-3 bg-blue-600 hover:bg-blue-700 transition-all duration-300 rounded-md py-3 font-semibold "
               >
                 Send Message
               </button>

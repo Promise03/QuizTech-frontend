@@ -10,7 +10,7 @@ export default function About() {
   };
 
   return (
-    <section className="text-white py-20 px-6 md:px-16 bg-gray-900">
+    <section className="text-white py-20 px-6 md:px-16 about-content">
       <div className="flex flex-col md:flex-row items-center gap-12">
         {/* Left Section */}
         <div className="flex-1">
