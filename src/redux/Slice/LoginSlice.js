@@ -1,15 +1,19 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// 1️⃣ Login User - Step 1: email & password
+// ✅ 1️⃣ Base URL setup (works for local + Render)
+const API_BASE_URL =
+  process.env.VITE_API_BASE_URL || "http://localhost:5002";
+axios.defaults.baseURL = API_BASE_URL;
+
+// ==========================
+// 🔑 1️⃣ LOGIN USER (Step 1: email & password)
+// ==========================
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async (credentials, { rejectWithValue }) => {
     try {
-      const res = await axios.post(
-        "http://localhost:5002/api/auth/login",
-        credentials
-      );
+      const res = await axios.post("/api/auth/login", credentials);
 
       // ✅ OTP required
       if (res.data?.status === "success" && res.data?.tempToken) {
@@ -29,7 +33,9 @@ export const loginUser = createAsyncThunk(
   }
 );
 
-// 2️⃣ Verify OTP - Step 2: OTP verification
+// ==========================
+// 🔐 2️⃣ VERIFY OTP (Step 2: OTP verification)
+// ==========================
 export const verifyOtp = createAsyncThunk(
   "auth/verifyOtp",
   async ({ otp }, { rejectWithValue }) => {
@@ -39,39 +45,37 @@ export const verifyOtp = createAsyncThunk(
         return rejectWithValue("Session expired. Please log in again.");
 
       const res = await axios.post(
-        "http://localhost:5002/api/verify-otp",
+        "/api/verify-otp",
         { otp },
         { headers: { Authorization: `Bearer ${tempToken}` } }
       );
 
-      // 🛑 FIXED LOGIC: Check for both token AND user data
+      // 🧠 FIXED LOGIC: Check for both token AND user data
       if (res.data?.token && res.data?.data) {
-        
         // 1. Save data
         localStorage.setItem("token", res.data.token);
-        localStorage.setItem("user", JSON.stringify(res.data.data)); // Cleanly save the user object
+        localStorage.setItem("user", JSON.stringify(res.data.data));
         localStorage.removeItem("tempToken");
-        localStorage.removeItem("error"); // Clear any previous error in local storage, if applicable
+        localStorage.removeItem("error");
 
         // 2. Return payload
         return {
           otpPending: false,
-          user: res.data.data, // This is correct, pulling user from the 'data' key
+          user: res.data.data,
           token: res.data.token,
           message: res.data?.message || "OTP verified successfully",
         };
       }
 
-      // If token or data is missing from the success response
       return rejectWithValue("Invalid server response after OTP verification.");
     } catch (err) {
-      // Handles 4xx errors from the server (e.g., Invalid OTP, Expired OTP)
       return rejectWithValue(err.response?.data?.message || err.message);
     }
   }
 );
+
 // ==========================
-// 🧠 Initial State
+// 🧠 3️⃣ INITIAL STATE
 // ==========================
 const initialState = {
   user: JSON.parse(localStorage.getItem("user")) || null,
@@ -85,27 +89,27 @@ const initialState = {
 };
 
 // ==========================
-// 🪄 Slice
+// 🪄 4️⃣ SLICE
 // ==========================
 const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-logout: (state) => {
-  state.user = null;
-  state.token = null;
-  state.tempToken = null;
-  state.email = null;
-  state.otpPending = false;
-  state.loading = false;
-  state.error = null;
-  state.message = null;
+    logout: (state) => {
+      state.user = null;
+      state.token = null;
+      state.tempToken = null;
+      state.email = null;
+      state.otpPending = false;
+      state.loading = false;
+      state.error = null;
+      state.message = null;
 
-  // 🧹 Clear all related items from localStorage
-  localStorage.removeItem("token");
-  localStorage.removeItem("tempToken");
-  localStorage.removeItem("user");
-},
+      // 🧹 Clear storage
+      localStorage.removeItem("token");
+      localStorage.removeItem("tempToken");
+      localStorage.removeItem("user");
+    },
 
     clearAuthMessage: (state) => {
       state.message = null;
@@ -114,8 +118,7 @@ logout: (state) => {
   },
   extraReducers: (builder) => {
     builder
-
-      // 🔑 LOGIN
+      // 🟡 LOGIN
       .addCase(loginUser.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -135,7 +138,7 @@ logout: (state) => {
         state.error = action.payload;
       })
 
-      // 📩 VERIFY OTP
+      // 🟢 VERIFY OTP
       .addCase(verifyOtp.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -157,7 +160,7 @@ logout: (state) => {
 });
 
 // ==========================
-// 📤 Export
+// 📤 5️⃣ EXPORT
 // ==========================
 export const { logout, clearAuthMessage } = authSlice.actions;
 export default authSlice.reducer;
