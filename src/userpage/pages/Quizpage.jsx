@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { Trophy } from 'lucide-react';
 // Assuming you are using React Router for navigation
 import { useNavigate } from 'react-router-dom'; 
-import Header from '../conponent/Header';
-import UserSidebar from '../conponent/Sidebar';
+// import Header from '../conponent/Header';
+// import UserSidebar from '../conponent/Sidebar';
 
 const QuizzesPage = () => {
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
     const [quizzes, setQuizzes] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -17,7 +18,7 @@ const QuizzesPage = () => {
         const fetchQuizzes = async () => {
             try {
                 // Using standard fetch API
-                const response = await fetch('http://localhost:5002/api/quiz/allquizzes');
+                const response = await fetch('${API_BASE_URL}/api/quiz/allquizzes');
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }

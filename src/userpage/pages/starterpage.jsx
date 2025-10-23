@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 
 
 const QuizStarter = () => {
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
     // 1. Get the quizId from the URL parameters
     const { quizId } = useParams(); 
     const navigate = useNavigate();
@@ -35,7 +36,7 @@ const QuizStarter = () => {
         const fetchQuiz = async () => {
             try {
                 // Assuming your backend has an endpoint like this to get a single quiz by ID
-                const res = await axios.get(`http://localhost:5002/api/quiz/${quizId}`);
+                const res = await axios.get(`${API_BASE_URL}/api/quiz/${quizId}`);
                 setQuiz(res.data.quiz); 
             } catch (err) {
                 console.error("Error fetching quiz:", err);

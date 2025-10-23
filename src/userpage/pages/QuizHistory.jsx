@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { History } from 'lucide-react';
-import Header from '../conponent/Header';
-import UserSidebar from '../conponent/Sidebar';
+// import Header from '../conponent/Header';
+// import UserSidebar from '../conponent/Sidebar';
 import axios from 'axios';
 
 const QuizHistoryPage = () => {
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -16,7 +17,7 @@ const QuizHistoryPage = () => {
     const fetchQuizHistory = async () => {
       try {
         const { data } = await axios.get(
-          `http://localhost:5000/api/userdashboard/${userId}`,
+          `${API_BASE_URL}/api/userdashboard/${userId}`,
           { withCredentials: true }
         );
 

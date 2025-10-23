@@ -3,6 +3,9 @@ import axios from "axios";
 import { Search, Filter, Users, Trash2, CheckCircle2, AlertTriangle } from "lucide-react";
 
 const UsersPage = () => {
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
   const [users, setUsers] = useState([]);
   const [filtered, setFiltered] = useState([]);
   const [search, setSearch] = useState("");
@@ -13,7 +16,7 @@ const UsersPage = () => {
   // ✅ Fetch users
   const fetchUsers = async () => {
     try {
-      const res = await axios.get("http://localhost:5002/api/users/alluser");
+      const res = await axios.get(`${API_BASE_URL}/api/users/alluser`);
       const usersArray = res.data.userDetails || [];
       setUsers(usersArray);
       setFiltered(usersArray);
@@ -48,7 +51,7 @@ const UsersPage = () => {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this user?")) return;
     try {
-      await axios.delete(`http://localhost:5002/api/users/delete/${id}`);
+      await axios.delete(`${API_BASE_URL}/api/users/delete/${id}`);
       setModal({
         show: true,
         type: "success",

@@ -3,10 +3,11 @@ import Header from '../conponent/Header';
 import UserSidebar from '../conponent/Sidebar';
 
 const SettingsPage = () => {
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const storedUser = JSON.parse(localStorage.getItem('user'));
   const CURRENT_USER_ID = storedUser?._id;
   const TOKEN = localStorage.getItem('token');
-  const API_BASE_URL = 'http://localhost:5002/api/users';
+  // const API_BASE_URL = 'http://localhost:5002/api/users';
 
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -22,7 +23,7 @@ const SettingsPage = () => {
     const fetchUserData = async () => {
       setLoading(true);
       try {
-        const response = await fetch(`${API_BASE_URL}/siguleuser/${CURRENT_USER_ID}`, {
+        const response = await fetch(`${API_BASE_URL}/api/users/siguleuser/${CURRENT_USER_ID}`, {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${TOKEN}`,

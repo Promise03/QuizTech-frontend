@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { FileText, Loader2, AlertCircle } from 'lucide-react';
-import Header from '../conponent/Header';
-import UserSidebar from '../conponent/Sidebar';
+// import Header from '../conponent/Header';
+// import UserSidebar from '../conponent/Sidebar';
 
 const DocumentPage = () => {
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const [documents, setDocuments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -13,7 +14,7 @@ const DocumentPage = () => {
   useEffect(() => {
     const fetchDocuments = async () => {
       try {
-        const response = await fetch('http://localhost:5002/api/documents/alldoc');
+        const response = await fetch('${API_BASE_URL}/api/documents/alldoc');
         if (!response.ok) throw new Error('Failed to fetch documents');
         const data = await response.json();
         setDocuments(data);

@@ -5,6 +5,7 @@ import UserSidebar from '../conponent/Sidebar';
 import axios from 'axios';
 
 const AchievementsPage = () => {
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const [achievements, setAchievements] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -16,7 +17,7 @@ const AchievementsPage = () => {
     const fetchAchievements = async () => {
       try {
         const { data } = await axios.get(
-          `http://localhost:5000/api/userdashboard/${userId}`, // ✅ Updated endpoint
+          `${API_BASE_URL}/api/userdashboard/${userId}`, // ✅ Updated endpoint
           { withCredentials: true } // optional if using cookies/JWT auth
         );
         setAchievements(data.achievements || []);

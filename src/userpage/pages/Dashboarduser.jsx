@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 // import UserHeader from "../conponent/Header.jsx";
 // import UserSidebar from "../conponent/Sidebar.jsx";
 
-const API_BASE_URL = "http://localhost:5002/api/analytics";
+
 
 const UserDashboard = () => {
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const storedUser = JSON.parse(localStorage.getItem("user"));
   const userId = storedUser?._id;
 
@@ -19,7 +20,7 @@ const UserDashboard = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const res = await fetch(`${API_BASE_URL}/userdashboard/${userId}`);
+        const res = await fetch(`${API_BASE_URL}/api/analytics/userdashboard/${userId}`);
         const data = await res.json();
         if (data.success) {
           setStats(data);

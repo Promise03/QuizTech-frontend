@@ -5,6 +5,9 @@ import { useSelector } from "react-redux";
 import { PlusCircle, FileQuestion, X, Eye, Trash2 } from "lucide-react"; 
 
 const QuizzesPage = () => {
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
+
     const [quizzes, setQuizzes] = useState([]);
     const [loading, setLoading] = useState(false);
     const [showModal, setShowModal] = useState(false);
@@ -32,7 +35,7 @@ const QuizzesPage = () => {
     // ✅ Fetch quizzes from backend
     const fetchQuizzes = async () => {
         try {
-            const res = await axios.get("http://localhost:5002/api/quiz/allquizzes");
+            const res = await axios.get(`${API_BASE_URL}/api/quiz/allquizzes`);
             setQuizzes(res.data.quizData || []);
         } catch (error) {
             console.error("Error fetching quizzes:", error);
@@ -116,7 +119,7 @@ const QuizzesPage = () => {
         
         try {
             const res = await axios.post(
-                "http://localhost:5002/api/quiz/createQuiz",
+                `${API_BASE_URL}/api/quiz/createQuiz`,
                 dataToSend, // Send data with createdBy
                 config      // Send auth headers
             );
@@ -165,7 +168,7 @@ const QuizzesPage = () => {
         
         try {
             // 🛑 CRITICAL FIX 3: Use axios.delete and pass config 🛑
-            await axios.delete(`http://localhost:5002/api/quiz/deleteQuiz/${quizId}`, config);
+            await axios.delete(`${API_BASE_URL}/api/quiz/deleteQuiz/${quizId}`, config);
 
             alert("🗑️ Quiz deleted successfully!");
             

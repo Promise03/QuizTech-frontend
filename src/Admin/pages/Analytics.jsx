@@ -11,9 +11,10 @@ import {
   Bar,
 } from "recharts";
 
-const API_BASE_URL = "http://localhost:5002/api/analytics";
+
 
 const AdminAnalytics = () => {
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const [userGrowth, setUserGrowth] = useState([]);
   const [quizStats, setQuizStats] = useState([]);
   const [docStats, setDocStats] = useState([]);
@@ -24,10 +25,10 @@ const AdminAnalytics = () => {
     const fetchAnalytics = async () => {
       try {
         const [userRes, docRes, quizRes, roleRes] = await Promise.all([
-          fetch(`${API_BASE_URL}/alluser`),
-          fetch(`${API_BASE_URL}/allDoc`),
-          fetch(`${API_BASE_URL}/allQuiz`),
-          fetch(`${API_BASE_URL}/alluserbyrole`),
+          fetch(`${API_BASE_URL}/api/analytics/alluser`),
+          fetch(`${API_BASE_URL}/api/analytics/allDoc`),
+          fetch(`${API_BASE_URL}/api/analytics/allQuiz`),
+          fetch(`${API_BASE_URL}/api/analytics/alluserbyrole`),
         ]);
 
         const [userData, docData, quizData, roleData] = await Promise.all([
