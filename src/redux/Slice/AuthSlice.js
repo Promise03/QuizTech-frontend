@@ -3,7 +3,7 @@ import axios from "axios";
 
 // ✅ 1️⃣ Base URL setup (works for local + Render)
 const API_BASE_URL =
-  process.env.VITE_API_BASE_URL || "http://localhost:5002";
+   import.meta.env.VITE_API_BASE_URL || "http://localhost:5002";
 axios.defaults.baseURL = API_BASE_URL;
 
 // ✅ 2️⃣ REGISTER USER THUNK
