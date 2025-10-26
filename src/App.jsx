@@ -20,7 +20,7 @@ import UsersPage from "./Admin/pages/User";
 import AdminQuizzes from "./Admin/pages/Quizze";
 import AdminAnalytics from "./Admin/pages/Analytics";
 import DocumentsAdmin from "./Admin/pages/Document";
-import VerifyOtp from "./pages/authpage/otp";
+// import VerifyOtp from "./pages/authpage/otp";
 import QuizStarter from "./userpage/pages/starterpage";
 import LoadingScreen from "./component/loadingSping";
 import ProtectedRoute from "./route/protectedRoute";
@@ -68,7 +68,7 @@ function App() {
         <Route path="/changePassword" element={<Changepassword />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/verify-otp" element={<VerifyOtp />} />
+        {/* <Route path="/verify-otp" element={<VerifyOtp />} /> */}
         <Route path="/*" element={<NotFound />} />
         <Route path="unauthorized" element={<Unauthorized />} />
 
