@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { FileText, Loader2, AlertCircle } from 'lucide-react';
-// import Header from '../conponent/Header';
-// import UserSidebar from '../conponent/Sidebar';
 
 const DocumentPage = () => {
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -14,7 +12,7 @@ const DocumentPage = () => {
   useEffect(() => {
     const fetchDocuments = async () => {
       try {
-        const response = await fetch('${API_BASE_URL}/api/documents/alldoc');
+        const response = await fetch(`${API_BASE_URL}/api/documents/alldoc`);
         if (!response.ok) throw new Error('Failed to fetch documents');
         const data = await response.json();
         setDocuments(data);
@@ -24,13 +22,13 @@ const DocumentPage = () => {
         setLoading(false);
       }
     };
+
     fetchDocuments();
-  }, []);
+  }, [API_BASE_URL]);
 
   return (
     <div className="flex">
       <div className="flex-1 flex flex-col overflow-auto">
-
         <div className="p-10">
           <header className="flex items-center space-x-3 mb-6">
             <FileText size={32} className="text-gray-700" />
@@ -74,7 +72,7 @@ const DocumentPage = () => {
                         Category: <span className="font-medium">{doc.categories}</span>
                       </p>
                       <p className="text-gray-700 mb-3">
-                        {doc.summary.length > 150
+                        {doc.summary?.length > 150
                           ? `${doc.summary.slice(0, 150)}...`
                           : doc.summary}
                       </p>

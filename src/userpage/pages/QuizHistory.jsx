@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { History } from 'lucide-react';
-// import Header from '../conponent/Header';
-// import UserSidebar from '../conponent/Sidebar';
 import axios from 'axios';
 
 const QuizHistoryPage = () => {
@@ -10,21 +8,22 @@ const QuizHistoryPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  // 🔹 Replace with however you store user info in your app
-  const userId = localStorage.getItem('userId');
+  // ✅ Make sure user data exists
+  const storedUser = JSON.parse(localStorage.getItem('user'));
+  const userId = storedUser?._id;
 
   useEffect(() => {
     const fetchQuizHistory = async () => {
       try {
         const { data } = await axios.get(
-          `${API_BASE_URL}/api/userdashboard/${userId}`,
+          `${API_BASE_URL}/api/anaylitics/userdashboard/${userId}`, // ✅ Correct route prefix
           { withCredentials: true }
         );
 
-        // ✅ Expect backend to return `data.history` array or fallback
+        // ✅ Expect backend to return { history: [...] } or fallback to []
         setHistory(data.history || []);
       } catch (err) {
-        console.error(err);
+        console.error('Error fetching quiz history:', err);
         setError('Failed to load quiz history. Please try again later.');
       } finally {
         setLoading(false);
@@ -32,12 +31,12 @@ const QuizHistoryPage = () => {
     };
 
     if (userId) fetchQuizHistory();
+    else setError('User not found. Please log in again.');
   }, [userId]);
 
   return (
     <div className="flex">
       <div className="flex-1 flex flex-col overflow-auto">
-   
         <div className="p-10">
           <header className="flex items-center space-x-3 mb-6">
             <History size={32} className="text-green-600" />
