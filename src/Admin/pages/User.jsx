@@ -4,7 +4,7 @@ import { Search, Filter, Users, Trash2, CheckCircle2, AlertTriangle } from "luci
 
 const UsersPage = () => {
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5002";
 
   const [users, setUsers] = useState([]);
   const [filtered, setFiltered] = useState([]);

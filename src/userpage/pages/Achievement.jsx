@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Trophy } from 'lucide-react';
-// import Header from '../conponent/Header';
-// import UserSidebar from '../conponent/Sidebar';
 import axios from 'axios';
 
 const AchievementsPage = () => {
@@ -10,19 +8,28 @@ const AchievementsPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  // ✅ Get user ID from local storage
+  // ✅ Get user and token from local storage
   const storedUser = JSON.parse(localStorage.getItem('user'));
-  const userId = storedUser?.id; // safer than using localStorage.getItem('userId')
+  const userId = storedUser?.id;
+  const token = localStorage.getItem('token'); // assuming you store it like this
 
   useEffect(() => {
     const fetchAchievements = async () => {
       try {
-        const response = await axios.get(
-          `${API_BASE_URL}/api/userdashboard/${userId}`,
-          { withCredentials: true }
-        );
+        if (!userId || !token) {
+          setError('User not authenticated. Please log in again.');
+          setLoading(false);
+          return;
+        }
 
-        // ✅ Use correct data structure from backend
+        // ✅ Fetch without withCredentials — using Bearer token instead
+        const response = await axios.get(`${API_BASE_URL}/api/userdashboard/${userId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        });
+
         setAchievements(response.data.achievements || []);
       } catch (err) {
         console.error(err);
@@ -32,8 +39,8 @@ const AchievementsPage = () => {
       }
     };
 
-    if (userId) fetchAchievements();
-  }, [API_BASE_URL, userId]);
+    fetchAchievements();
+  }, [API_BASE_URL, userId, token]);
 
   return (
     <div className="flex">

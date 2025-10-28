@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { PlusCircle, FileQuestion, X, Eye, Trash2 } from "lucide-react"; 
 
 const QuizzesPage = () => {
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5002";
 
 
     const [quizzes, setQuizzes] = useState([]);

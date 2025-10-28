@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import {
   Settings,
   LayoutDashboard,
@@ -8,14 +8,13 @@ import {
   BarChart,
   LogOut,
   Book,
-  Menu,
-  X,
 } from "lucide-react";
 import { useDispatch } from "react-redux";
 import { logout } from "../../redux/Slice/LoginSlice";
 
 const AdminSidebar = ({ open, toggle, closeOnMobile }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate(); // ✅ added for redirect after logout
   const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
 
   useEffect(() => {
@@ -33,8 +32,9 @@ const AdminSidebar = ({ open, toggle, closeOnMobile }) => {
   ];
 
   const handleLogout = () => {
-    dispatch(logout());
-    closeOnMobile();
+    dispatch(logout());       // ✅ clears Redux + localStorage
+    closeOnMobile();          // ✅ close sidebar on mobile
+    navigate("/login");       // ✅ redirect to login page
   };
 
   return (

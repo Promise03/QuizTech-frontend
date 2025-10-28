@@ -8,19 +8,30 @@ const QuizHistoryPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  // ✅ Make sure user data exists
+  // ✅ Get user info and token safely
   const storedUser = JSON.parse(localStorage.getItem('user'));
   const userId = storedUser?.id;
+  const token = localStorage.getItem('token'); // assumes you save token at login
 
   useEffect(() => {
     const fetchQuizHistory = async () => {
       try {
+        if (!userId || !token) {
+          setError('User not authenticated. Please log in again.');
+          setLoading(false);
+          return;
+        }
+
         const { data } = await axios.get(
-          `${API_BASE_URL}/api/anaylitics/userdashboard/${userId}`, // ✅ Correct route prefix
-          { withCredentials: true }
+          `${API_BASE_URL}/api/anaylitics/userdashboard/${userId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json',
+            },
+          }
         );
 
-        // ✅ Expect backend to return { history: [...] } or fallback to []
         setHistory(data.history || []);
       } catch (err) {
         console.error('Error fetching quiz history:', err);
@@ -30,9 +41,8 @@ const QuizHistoryPage = () => {
       }
     };
 
-    if (userId) fetchQuizHistory();
-    else setError('User not found. Please log in again.');
-  }, [userId]);
+    fetchQuizHistory();
+  }, [API_BASE_URL, userId, token]);
 
   return (
     <div className="flex">
