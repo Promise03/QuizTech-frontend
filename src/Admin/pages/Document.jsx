@@ -13,7 +13,9 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const DocumentsAdmin = () => {
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5002";
+  const API_BASE_URL =
+    import.meta.env.VITE_API_BASE_URL || "http://localhost:5002";
+  const BASE_URL = `${API_BASE_URL}/api/documents`;
 
   const [documents, setDocuments] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -31,8 +33,6 @@ const DocumentsAdmin = () => {
     videoUrl: "",
   });
 
-  // const BASE_URL = "http://localhost:5002/api/documents";
-
   // 🧭 Fetch all documents
   useEffect(() => {
     fetchDocuments();
@@ -41,9 +41,11 @@ const DocumentsAdmin = () => {
   const fetchDocuments = async () => {
     setLoading(true);
     try {
-      const res = await axios.get(`${API_BASE_URL}/alldoc`);
+      const res = await axios.get(`${BASE_URL}/alldoc`);
       setDocuments(res.data);
+      setError(null);
     } catch (err) {
+      console.error("Fetch error:", err.response?.data || err.message);
       setError("Failed to load documents");
     } finally {
       setLoading(false);
@@ -75,6 +77,7 @@ const DocumentsAdmin = () => {
       setShowForm(false);
       fetchDocuments();
     } catch (err) {
+      console.error("Save error:", err.response?.data || err.message);
       toast.error("Error saving document");
     }
   };
@@ -92,6 +95,7 @@ const DocumentsAdmin = () => {
       toast.success("Document deleted!");
       fetchDocuments();
     } catch (err) {
+      console.error("Delete error:", err.response?.data || err.message);
       toast.error("Error deleting document");
     }
   };
@@ -242,7 +246,8 @@ const DocumentsAdmin = () => {
                     {doc.title}
                   </h3>
                   <p className="text-sm text-gray-500 mb-2">
-                    Category: <span className="font-medium">{doc.category}</span>
+                    Category:{" "}
+                    <span className="font-medium">{doc.category}</span>
                   </p>
                   <p className="text-gray-700 mb-3">
                     {doc.summary.length > 150
