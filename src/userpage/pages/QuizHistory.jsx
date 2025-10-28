@@ -3,14 +3,14 @@ import { History } from 'lucide-react';
 import axios from 'axios';
 
 const QuizHistoryPage = () => {
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5002";
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
   // ✅ Make sure user data exists
   const storedUser = JSON.parse(localStorage.getItem('user'));
-  const userId = storedUser?._id;
+  const userId = storedUser?.id;
 
   useEffect(() => {
     const fetchQuizHistory = async () => {

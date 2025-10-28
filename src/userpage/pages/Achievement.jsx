@@ -5,14 +5,14 @@ import { Trophy } from 'lucide-react';
 import axios from 'axios';
 
 const AchievementsPage = () => {
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5002";
   const [achievements, setAchievements] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
   // ✅ Get user ID from local storage
   const storedUser = JSON.parse(localStorage.getItem('user'));
-  const userId = storedUser?._id; // safer than using localStorage.getItem('userId')
+  const userId = storedUser?.id; // safer than using localStorage.getItem('userId')
 
   useEffect(() => {
     const fetchAchievements = async () => {

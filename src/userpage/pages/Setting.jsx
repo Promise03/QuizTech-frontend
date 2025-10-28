@@ -3,9 +3,9 @@ import React, { useState, useEffect } from 'react';
 // import UserSidebar from '../conponent/Sidebar';
 
 const SettingsPage = () => {
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5002";
   const storedUser = JSON.parse(localStorage.getItem('user'));
-  const CURRENT_USER_ID = storedUser?._id;
+  const CURRENT_USER_ID = storedUser?.id;
   const TOKEN = localStorage.getItem('token');
 
   const [username, setUsername] = useState('');
