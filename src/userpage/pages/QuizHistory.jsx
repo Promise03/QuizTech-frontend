@@ -8,10 +8,10 @@ const QuizHistoryPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  // ✅ Get user info and token safely
+  // ✅ Get user and token
   const storedUser = JSON.parse(localStorage.getItem('user'));
   const userId = storedUser?.id;
-  const token = localStorage.getItem('token'); // assumes you save token at login
+  const token = localStorage.getItem('token');
 
   useEffect(() => {
     const fetchQuizHistory = async () => {
@@ -22,8 +22,9 @@ const QuizHistoryPage = () => {
           return;
         }
 
+        // ✅ Correct endpoint name
         const { data } = await axios.get(
-          `${API_BASE_URL}/api/anaylitics/userdashboard/${userId}`,
+          `${API_BASE_URL}/api/analytics/userdashboard/${userId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -32,7 +33,10 @@ const QuizHistoryPage = () => {
           }
         );
 
-        setHistory(data.history || []);
+        console.log("✅ API Response:", data);
+
+        // ✅ Use the correct field from backend
+        setHistory(data.recentQuizzes || []);
       } catch (err) {
         console.error('Error fetching quiz history:', err);
         setError('Failed to load quiz history. Please try again later.');
@@ -70,12 +74,12 @@ const QuizHistoryPage = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {history.map(({ id, title, score, date }) => (
-                    <tr key={id} className="hover:bg-gray-50 transition">
-                      <td className="py-3 px-4">{title}</td>
-                      <td className="py-3 px-4">{score}%</td>
+                  {history.map((quiz, index) => (
+                    <tr key={index} className="hover:bg-gray-50 transition">
+                      <td className="py-3 px-4">{quiz.title}</td>
+                      <td className="py-3 px-4">{quiz.score}%</td>
                       <td className="py-3 px-4">
-                        {new Date(date).toLocaleDateString()}
+                        {new Date(quiz.date).toLocaleDateString()}
                       </td>
                     </tr>
                   ))}
