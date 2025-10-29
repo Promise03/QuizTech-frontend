@@ -1,45 +1,44 @@
-import React, { useEffect, useState } from 'react';
-import { History } from 'lucide-react';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import { History } from "lucide-react";
+import axios from "axios";
 
 const QuizHistoryPage = () => {
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5002";
+  const storedUser = JSON.parse(localStorage.getItem("user"));
+  const userId = storedUser?._id || storedUser?.id;
+  const token = localStorage.getItem("token");
+
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
-
-  // ✅ Get user and token
-  const storedUser = JSON.parse(localStorage.getItem('user'));
-  const userId = storedUser?.id;
-  const token = localStorage.getItem('token');
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const fetchQuizHistory = async () => {
       try {
         if (!userId || !token) {
-          setError('User not authenticated. Please log in again.');
+          setError("User not authenticated. Please log in again.");
           setLoading(false);
           return;
         }
 
-        // ✅ Correct endpoint name
         const { data } = await axios.get(
           `${API_BASE_URL}/api/analytics/userdashboard/${userId}`,
           {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              'Content-Type': 'application/json',
-            },
+            headers: { Authorization: `Bearer ${token}` },
           }
         );
 
-        console.log("✅ API Response:", data);
+        console.log("✅ Quiz history data:", data);
 
-        // ✅ Use the correct field from backend
-        setHistory(data.recentQuizzes || []);
+        if (data.success) {
+          // use recentQuizzes (backend returns this array)
+          setHistory(data.recentQuizzes || []);
+        } else {
+          setError("Failed to load quiz history.");
+        }
       } catch (err) {
-        console.error('Error fetching quiz history:', err);
-        setError('Failed to load quiz history. Please try again later.');
+        console.error("❌ Error fetching quiz history:", err);
+        setError("Failed to load quiz history.");
       } finally {
         setLoading(false);
       }
@@ -75,11 +74,13 @@ const QuizHistoryPage = () => {
                 </thead>
                 <tbody>
                   {history.map((quiz, index) => (
-                    <tr key={index} className="hover:bg-gray-50 transition">
-                      <td className="py-3 px-4">{quiz.title}</td>
-                      <td className="py-3 px-4">{quiz.score}%</td>
+                    <tr key={quiz._id || index} className="hover:bg-gray-50 transition">
+                      <td className="py-3 px-4">{quiz.quizTitle}</td>
                       <td className="py-3 px-4">
-                        {new Date(quiz.date).toLocaleDateString()}
+                        {quiz.score}/{quiz.totalQuestions}
+                      </td>
+                      <td className="py-3 px-4">
+                        {new Date(quiz.createdAt).toLocaleDateString()}
                       </td>
                     </tr>
                   ))}

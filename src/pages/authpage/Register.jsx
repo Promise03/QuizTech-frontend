@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearAuthState, registerUser } from "../../redux/Slice/AuthSlice";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Eye, EyeOff } from "lucide-react";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -15,8 +16,12 @@ export default function Register() {
     username: "",
     email: "",
     password: "",
+    confirmPassword: "",
     role: "Student",
   });
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const { loading, error, user } = useSelector((state) => state.auth);
 
@@ -26,23 +31,42 @@ export default function Register() {
       username: "",
       email: "",
       password: "",
+      confirmPassword: "",
       role: "Student",
     });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Submitting data:", data);
-    dispatch(registerUser(data));
   };
 
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
-  useEffect(() => {
-    console.log("Effect triggered:", { user, error });
+  const validatePassword = (password) => {
+    // Must be 8+ chars, contain uppercase, lowercase, number, and special char
+    const regex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    return regex.test(password);
+  };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (data.password !== data.confirmPassword) {
+      toast.error("Passwords do not match!");
+      return;
+    }
+
+    if (!validatePassword(data.password)) {
+      toast.error(
+        "Password must be at least 8 characters, include uppercase, lowercase, number, and special character."
+      );
+      return;
+    }
+
+    console.log("Submitting data:", data);
+    dispatch(registerUser(data));
+  };
+
+  useEffect(() => {
     let timer;
 
     if (user && user.success) {
@@ -76,6 +100,7 @@ export default function Register() {
           </h1>
 
           <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+            {/* Name */}
             <input
               type="text"
               name="name"
@@ -85,6 +110,8 @@ export default function Register() {
               required
               className="border border-gray-300 dark:border-gray-700 rounded-2xl p-3 bg-transparent text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none"
             />
+
+            {/* Username */}
             <input
               type="text"
               name="username"
@@ -94,6 +121,8 @@ export default function Register() {
               required
               className="border border-gray-300 dark:border-gray-700 rounded-2xl p-3 bg-transparent text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none"
             />
+
+            {/* Email */}
             <input
               type="email"
               name="email"
@@ -103,15 +132,50 @@ export default function Register() {
               required
               className="border border-gray-300 dark:border-gray-700 rounded-2xl p-3 bg-transparent text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none"
             />
-            <input
-              type="password"
-              name="password"
-              placeholder="Enter your password"
-              value={data.password}
-              onChange={handleChange}
-              required
-              className="border border-gray-300 dark:border-gray-700 rounded-2xl p-3 bg-transparent text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none"
-            />
+
+            {/* Password */}
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                name="password"
+                placeholder="Enter your password"
+                value={data.password}
+                onChange={handleChange}
+                required
+                className="w-full border border-gray-300 dark:border-gray-700 rounded-2xl p-3 pr-10 bg-transparent text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none"
+              />
+              <span
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-3.5 cursor-pointer text-gray-500"
+              >
+                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              </span>
+            </div>
+
+            {/* Confirm Password */}
+            <div className="relative">
+              <input
+                type={showConfirmPassword ? "text" : "password"}
+                name="confirmPassword"
+                placeholder="Confirm your password"
+                value={data.confirmPassword}
+                onChange={handleChange}
+                required
+                className="w-full border border-gray-300 dark:border-gray-700 rounded-2xl p-3 pr-10 bg-transparent text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none"
+              />
+              <span
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                className="absolute right-3 top-3.5 cursor-pointer text-gray-500"
+              >
+                {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              </span>
+            </div>
+
+            {/* Password requirements */}
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              Password must include at least 8 characters, one uppercase letter,
+              one lowercase letter, one number, and one special character.
+            </p>
 
             <button
               type="submit"

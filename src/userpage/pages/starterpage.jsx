@@ -96,7 +96,7 @@ const handleSubmitQuiz = async () => {
   try {
     const payload = {
       quizId,
-      userId: user?._id || "672b1d2exampleid", // ✅ uses logged-in user's ID
+      userId: user?.id || "672b1d2exampleid", // ✅ uses logged-in user's ID
       score: finalScore,
       totalQuestions: quiz.questions.length,
     };
@@ -157,7 +157,7 @@ const handleSubmitQuiz = async () => {
                     You scored **{score} out of {totalQuestions}**
                 </p>
                 <button
-                    onClick={() => navigate('/quizzes')}
+                    onClick={() => navigate('/user/quizzes')}
                     className="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition"
                 >
                     Back to Quizzes

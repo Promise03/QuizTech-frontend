@@ -1,5 +1,5 @@
-import React from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import React from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import {
   LayoutDashboard,
   History,
@@ -7,33 +7,49 @@ import {
   FileText,
   Settings,
   LogOut,
-  X
-} from 'lucide-react';
-import { useDispatch } from 'react-redux';
-import { logout } from '../../redux/Slice/LoginSlice';
+  X,
+} from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../redux/Slice/LoginSlice";
 
 const UserSidebar = ({ open, toggle, closeOnMobile }) => {
-  const linkClasses = ({ isActive }) =>
-    `flex items-center space-x-3 p-3 rounded-lg transition-colors duration-200 ${
-      isActive
-        ? 'bg-indigo-600 text-white shadow-md'
-        : 'text-gray-600 hover:bg-gray-100 hover:text-indigo-700'
-    }`;
-
   const dispatch = useDispatch();
-  const navigate = useNavigate(); // ✅ FIXED: added parentheses
+  const navigate = useNavigate();
+
+  // ✅ Get user from Redux store
+  const { user } = useSelector((state) => state.login);
 
   const handleLogout = () => {
     dispatch(logout());
-    navigate('/login');
+    navigate("/login");
   };
+
+  // ✅ Function to dynamically display the user's name
+  const getUserDisplayName = () => {
+    if (user) {
+      return (
+        user.name ||
+        user.username ||
+        user.email?.split("@")[0] || // fallback to email prefix
+        "User"
+      );
+    }
+    return "User";
+  };
+
+  const linkClasses = ({ isActive }) =>
+    `flex items-center space-x-3 p-3 rounded-lg transition-colors duration-200 ${
+      isActive
+        ? "bg-indigo-600 text-white shadow-md"
+        : "text-gray-600 hover:bg-gray-100 hover:text-indigo-700"
+    }`;
 
   return (
     <>
       {/* === Overlay for mobile === */}
       {open && (
         <div
-          className="fixed inset-0  bg-black bg-opacity-40 z-40 lg:hidden"
+          className="fixed inset-0 bg-black bg-opacity-40 z-40 lg:hidden"
           onClick={closeOnMobile}
         ></div>
       )}
@@ -41,7 +57,7 @@ const UserSidebar = ({ open, toggle, closeOnMobile }) => {
       {/* === Sidebar === */}
       <div
         className={`fixed top-0 left-0 h-full w-64 bg-white shadow-lg text-gray-800 flex flex-col p-6 z-50 transform transition-transform duration-300 ease-in-out
-        ${open ? 'translate-x-0' : '-translate-x-full'} 
+        ${open ? "translate-x-0" : "-translate-x-full"} 
         lg:translate-x-0
       `}
       >
@@ -54,46 +70,75 @@ const UserSidebar = ({ open, toggle, closeOnMobile }) => {
         </button>
 
         {/* === User Profile Section === */}
-        <div className="flex items-center space-x-3 mb-10 mt-8">
-          <img
-            src="https://via.placeholder.com/64"
-            alt="User Profile"
-            className="rounded-full w-16 h-16 border-2 border-indigo-600"
-          />
+        <div className="flex items-center space-x-3 mb-10 mt-0 flex-col">
+         <img
+    src="/defaultprofile.jpg" // local fallback image
+    alt="User Profile"
+    className="rounded-full w-16 h-16 border-2 border-indigo-600 object-cover"
+  />
           <div>
-            <span className="text-xl font-bold">Welcome, Alex</span>
-            <p className="text-sm text-gray-500">Ready for a challenge?</p>
+            <span className="text-xl font-bold">
+              Welcome, {getUserDisplayName()}
+            </span>
+            <p className="text-sm text-gray-500">
+              Ready for a challenge?
+            </p>
           </div>
         </div>
 
         {/* === Navigation Links === */}
         <nav className="flex-1 space-y-2">
-          <NavLink to="/user" end className={linkClasses} onClick={closeOnMobile}>
+          <NavLink
+            to="/user"
+            end
+            className={linkClasses}
+            onClick={closeOnMobile}
+          >
             <LayoutDashboard size={24} />
             <span>Dashboard</span>
           </NavLink>
 
-          <NavLink to="/user/quizzes" className={linkClasses} onClick={closeOnMobile}>
+          <NavLink
+            to="/user/quizzes"
+            className={linkClasses}
+            onClick={closeOnMobile}
+          >
             <Trophy size={24} />
             <span>Quizzes</span>
           </NavLink>
 
-          <NavLink to="/user/history" className={linkClasses} onClick={closeOnMobile}>
+          <NavLink
+            to="/user/history"
+            className={linkClasses}
+            onClick={closeOnMobile}
+          >
             <History size={24} />
             <span>Quiz History</span>
           </NavLink>
 
-          <NavLink to="/user/achievements" className={linkClasses} onClick={closeOnMobile}>
+          <NavLink
+            to="/user/achievements"
+            className={linkClasses}
+            onClick={closeOnMobile}
+          >
             <Trophy size={24} />
             <span>Achievements</span>
           </NavLink>
 
-          <NavLink to="/user/document" className={linkClasses} onClick={closeOnMobile}>
+          <NavLink
+            to="/user/document"
+            className={linkClasses}
+            onClick={closeOnMobile}
+          >
             <FileText size={24} />
             <span>Documents</span>
           </NavLink>
 
-          <NavLink to="/user/settings" className={linkClasses} onClick={closeOnMobile}>
+          <NavLink
+            to="/user/settings"
+            className={linkClasses}
+            onClick={closeOnMobile}
+          >
             <Settings size={24} />
             <span>Settings</span>
           </NavLink>

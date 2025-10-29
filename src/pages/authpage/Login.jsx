@@ -121,19 +121,21 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import { loginUser } from "../../redux/Slice/LoginSlice";
+import { Eye, EyeOff } from "lucide-react";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
- const { loading, error, token, user } = useSelector(
-        (state) => state.login
-    );
+  const { loading, error, token, user } = useSelector((state) => state.login);
 
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
   });
+
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -147,40 +149,32 @@ export default function Login() {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Sending Payload:", credentials);
+    if (!credentials.email || !credentials.password) {
+      toast.error("Please fill in all fields");
+      return;
+    }
     dispatch(loginUser(credentials));
   };
 
   useEffect(() => {
     if (token && user) {
-      toast.success("Login successful. Redirecting....");
+      toast.success("Login successful. Redirecting...");
       resetForm();
-     setTimeout(() => {
-              if (user && user.role) { 
-            if (user.role === "Admin") navigate("/admin");
-            else navigate("/user");
-                  }
-            }, 1000);
+
+      const timer = setTimeout(() => {
+        if (user?.role === "Admin") navigate("/admin");
+        else navigate("/user");
+      }, 1000);
+
       return () => clearTimeout(timer);
     }
+
     if (error) {
       toast.error(error);
     }
-  }, [error, token, navigate]);
-  // useEffect(() => {
-  
-  //       if (token && user) {
-  //           toast.success("OTP verified! Redirecting...");
-  //           setTimeout(() => {
-  //             if (user && user.role) { 
-  //           if (user.role === "Admin") navigate("/admin");
-  //           else navigate("/user");
-  //                 }
-  //           }, 1000);
-  //       }
-  //   }, [token, user, navigate]);
+  }, [error, token, user, navigate]);
 
   const toggleToRegister = () => navigate("/register");
   const forgetPassword = () => navigate("/forgetPassword");
@@ -196,23 +190,37 @@ export default function Login() {
           </h1>
 
           <form onSubmit={handleSubmit} className="w-full flex flex-col gap-5">
+            {/* Email Input */}
             <input
-              type="text"
+              type="email"
               name="email"
               className="border border-gray-300 dark:border-gray-700 rounded-2xl p-3 bg-transparent text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none"
               placeholder="Enter your email"
-              onChange={handleChange}
-              required
-            />
-            <input
-              type="password"
-              name="password"
-              className="border border-gray-300 dark:border-gray-700 rounded-2xl p-3 bg-transparent text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none"
-              placeholder="Enter your password"
+              value={credentials.email}
               onChange={handleChange}
               required
             />
 
+            {/* Password Input with Show/Hide */}
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                name="password"
+                className="w-full border border-gray-300 dark:border-gray-700 rounded-2xl p-3 pr-10 bg-transparent text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none"
+                placeholder="Enter your password"
+                value={credentials.password}
+                onChange={handleChange}
+                required
+              />
+              <span
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-3.5 cursor-pointer text-gray-500"
+              >
+                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              </span>
+            </div>
+
+            {/* Forgot Password */}
             <p
               className="text-right text-blue-600 hover:underline cursor-pointer text-sm"
               onClick={forgetPassword}
@@ -220,11 +228,12 @@ export default function Login() {
               Forgot Password?
             </p>
 
+            {/* Submit Button */}
             <button
               disabled={loading}
               className={`p-3 rounded-2xl text-lg text-white font-serif transition-all duration-300 ${
                 loading
-                  ? "bg-bg-gray-500 cursor-not-allowed"
+                  ? "bg-gray-500 cursor-not-allowed"
                   : "bg-blue-600 hover:bg-blue-700"
               }`}
             >
