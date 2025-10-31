@@ -134,14 +134,14 @@ const UserSidebar = ({ open, toggle, closeOnMobile }) => {
             <span>Documents</span>
           </NavLink>
 
-          <NavLink
+          {/* <NavLink
             to="/user/settings"
             className={linkClasses}
             onClick={closeOnMobile}
           >
             <Settings size={24} />
             <span>Settings</span>
-          </NavLink>
+          </NavLink> */}
         </nav>
 
         {/* === Logout === */}

@@ -1,7 +1,7 @@
 import React from "react";
 import { Menu, Play } from "lucide-react";
 
-const Header = ({ title = "Dashboard", toggleSidebar, sidebarOpen }) => {
+const Header = ({ title = "QiuzTech", toggleSidebar, sidebarOpen }) => {
   return (
     <header
       className={`fixed top-0 w-full right-0 bg-white shadow-md flex items-center justify-between px-4 py-3 lg:px-6 z-30 transition-all duration-300 ease-in-out 

@@ -1,7 +1,7 @@
 import React from "react";
 import { Menu } from "lucide-react";
 
-const AdminHeader = ({ title = "Admin Dashboard", sidebarOpen, toggleSidebar }) => {
+const AdminHeader = ({ title = "QiuzTech", sidebarOpen, toggleSidebar }) => {
   return (
     <header
       className={`fixed top-0 right-0 bg-white shadow-md flex items-center justify-between px-4 py-4.5 lg:px-8 z-40 transition-all duration-300 ease-in-out

@@ -756,6 +756,12 @@ const QuizzesPage = () => {
                   <option value="">Select Tech Stack</option>
                   <option value="Frontend">Frontend</option>
                   <option value="Backend">Backend</option>
+                   <option value="Frontend">Cyber Security</option>
+                  <option value="DevOps">Mobile Development</option>
+                  <option value="Frontend">Cloud Computing</option>
+                  <option value="Backend">AI/Machine Learning</option>
+                   <option value="Frontend">FullStack</option>
+                  <option value="DevOps">Data Analysis</option>
                 </select>
               </div>
 

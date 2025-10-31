@@ -12,7 +12,7 @@ import Contact from "./pages/Contact";
 import AdminDashboard from "./Admin/pages/Dashboard";
 import DocumentPage from "./userpage/pages/Document";
 import QuizzesPage from "./userpage/pages/Quizpage";
-import SettingsPage from "./userpage/pages/Setting";
+// import SettingsPage from "./userpage/pages/Setting";
 import AchievementsPage from "./userpage/pages/Achievement";
 import QuizHistoryPage from "./userpage/pages/QuizHistory";
 import AdminLayout from "./Admin/AdminLayout";
@@ -77,7 +77,7 @@ function App() {
           <Route index element={<UserDashboard />} />
           <Route path="document" element={<DocumentPage />} />
           <Route path="quizzes" element={<QuizzesPage />} />
-          <Route path="settings" element={<SettingsPage />} />
+          {/* <Route path="settings" element={<SettingsPage />} /> */}
           <Route path="achievements" element={<AchievementsPage />} />
           <Route path="history" element={<QuizHistoryPage />} />
         </Route>
