@@ -31,7 +31,7 @@ const UserLayout = () => {
           mt-0 lg:mt-0 overflow-hidden
         `}
       >
-        <Header title="User Dashboard" toggleSidebar={toggle} />
+        <Header  toggleSidebar={toggle} />
         <div className="mt-16 p-4">
           <Outlet />
         </div>

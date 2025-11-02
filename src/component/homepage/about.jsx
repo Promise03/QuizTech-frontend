@@ -15,15 +15,15 @@ export default function About() {
         {/* Left Section */}
         <div className="flex-1">
           <h2 className="text-4xl font-bold mb-4 text-blue-400">About QuizTech</h2>
-          <p className="mb-5 text-gray-300 leading-relaxed">
+          <p className="mb-5  leading-relaxed">
             QuizTech was founded in 2020 with a simple mission: to make learning fun and accessible to everyone. 
             We believe that knowledge should be engaging, interactive, and rewarding.
           </p>
-          <p className="mb-5 text-gray-300 leading-relaxed">
+          <p className="mb-5 leading-relaxed">
             Our team of educators, designers, and developers work tirelessly to create 
             high-quality quizzes that challenge and entertain users of all ages and knowledge levels.
           </p>
-          <p className="mb-5 text-gray-300 leading-relaxed">
+          <p className="mb-5 leading-relaxed">
             With over <strong>500,000+ active users</strong> and <strong>10,000+ quizzes</strong>, 
             we're proud to be one of the fastest-growing quiz platforms on the web.
           </p>

@@ -1,11 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import {
   LayoutDashboard,
   History,
   Trophy,
   FileText,
-  Settings,
   LogOut,
   X,
 } from "lucide-react";
@@ -15,22 +14,22 @@ import { logout } from "../../redux/Slice/LoginSlice";
 const UserSidebar = ({ open, toggle, closeOnMobile }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  // ✅ Get user from Redux store
   const { user } = useSelector((state) => state.login);
 
-  const handleLogout = () => {
+  // ✅ Modal state
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
+
+  const handleLogoutConfirm = () => {
     dispatch(logout());
     navigate("/login");
   };
 
-  // ✅ Function to dynamically display the user's name
   const getUserDisplayName = () => {
     if (user) {
       return (
         user.name ||
         user.username ||
-        user.email?.split("@")[0] || // fallback to email prefix
+        user.email?.split("@")[0] ||
         "User"
       );
     }
@@ -58,8 +57,7 @@ const UserSidebar = ({ open, toggle, closeOnMobile }) => {
       <div
         className={`fixed top-0 left-0 h-full w-64 bg-white shadow-lg text-gray-800 flex flex-col p-6 z-50 transform transition-transform duration-300 ease-in-out
         ${open ? "translate-x-0" : "-translate-x-full"} 
-        lg:translate-x-0
-      `}
+        lg:translate-x-0`}
       >
         {/* === Close button (mobile only) === */}
         <button
@@ -71,83 +69,51 @@ const UserSidebar = ({ open, toggle, closeOnMobile }) => {
 
         {/* === User Profile Section === */}
         <div className="flex items-center space-x-3 mb-10 mt-0 flex-col">
-         <img
-    src="/defaultprofile.jpg" // local fallback image
-    alt="User Profile"
-    className="rounded-full w-16 h-16 border-2 border-indigo-600 object-cover"
-  />
-          <div>
+          <img
+            src="/defaultprofile.jpg"
+            alt="User Profile"
+            className="rounded-full w-16 h-16 border-2 border-indigo-600 object-cover"
+          />
+          <div className="text-center">
             <span className="text-xl font-bold">
               Welcome, {getUserDisplayName()}
             </span>
-            <p className="text-sm text-gray-500">
-              Ready for a challenge?
-            </p>
+            <p className="text-sm text-gray-500">Ready for a challenge?</p>
           </div>
         </div>
 
         {/* === Navigation Links === */}
         <nav className="flex-1 space-y-2">
-          <NavLink
-            to="/user"
-            end
-            className={linkClasses}
-            onClick={closeOnMobile}
-          >
+          <NavLink to="/user" end className={linkClasses} onClick={closeOnMobile}>
             <LayoutDashboard size={24} />
             <span>Dashboard</span>
           </NavLink>
 
-          <NavLink
-            to="/user/quizzes"
-            className={linkClasses}
-            onClick={closeOnMobile}
-          >
+          <NavLink to="/user/quizzes" className={linkClasses} onClick={closeOnMobile}>
             <Trophy size={24} />
             <span>Quizzes</span>
           </NavLink>
 
-          <NavLink
-            to="/user/history"
-            className={linkClasses}
-            onClick={closeOnMobile}
-          >
+          <NavLink to="/user/history" className={linkClasses} onClick={closeOnMobile}>
             <History size={24} />
             <span>Quiz History</span>
           </NavLink>
 
-          <NavLink
-            to="/user/achievements"
-            className={linkClasses}
-            onClick={closeOnMobile}
-          >
+          <NavLink to="/user/achievements" className={linkClasses} onClick={closeOnMobile}>
             <Trophy size={24} />
             <span>Achievements</span>
           </NavLink>
 
-          <NavLink
-            to="/user/document"
-            className={linkClasses}
-            onClick={closeOnMobile}
-          >
+          <NavLink to="/user/document" className={linkClasses} onClick={closeOnMobile}>
             <FileText size={24} />
             <span>Documents</span>
           </NavLink>
-
-          {/* <NavLink
-            to="/user/settings"
-            className={linkClasses}
-            onClick={closeOnMobile}
-          >
-            <Settings size={24} />
-            <span>Settings</span>
-          </NavLink> */}
         </nav>
 
-        {/* === Logout === */}
+        {/* === Logout Button === */}
         <div className="mt-auto">
           <button
-            onClick={handleLogout}
+            onClick={() => setShowLogoutModal(true)}
             className="flex items-center space-x-3 p-3 rounded-lg transition-colors duration-200 text-red-500 hover:bg-red-100 w-full"
           >
             <LogOut size={24} />
@@ -155,6 +121,31 @@ const UserSidebar = ({ open, toggle, closeOnMobile }) => {
           </button>
         </div>
       </div>
+
+      {/* === Logout Confirmation Modal === */}
+      {showLogoutModal && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[999]">
+          <div className="bg-white rounded-2xl shadow-lg p-6 w-[90%] max-w-sm text-center">
+            <h2 className="text-lg font-semibold text-gray-800 mb-4">
+              Are you sure you want to logout?
+            </h2>
+            <div className="flex justify-center space-x-4">
+              <button
+                onClick={handleLogoutConfirm}
+                className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition"
+              >
+                Yes, Logout
+              </button>
+              <button
+                onClick={() => setShowLogoutModal(false)}
+                className="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };

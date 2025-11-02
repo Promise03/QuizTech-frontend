@@ -160,13 +160,11 @@ html {
   color: var(--text-dark);
   box-shadow: var(--shadow);
 }
-.Hero h1{
-  color: var(--text-light);
-}
-.Hero p{
+
+/* .Hero p{
   color: var(--text-dark);
-}
-.Hero {
+} */
+/* .Hero {
   background: 
     linear-gradient(
       rgba(10, 20, 30, 0.6),
@@ -186,7 +184,7 @@ html {
   color: var(--text-dark);
   box-shadow: inset 0 0 50px rgba(0, 229, 255, 0.15);
   transition: background  0.4s ease, color 0.4s ease;
-}
+} */
 
 .Hero h1, .contact-hero h1 {
   font-weight: 800;
@@ -210,27 +208,6 @@ html {
 }
 
 
-.contact-hero{
-  background: 
-    linear-gradient(
-      rgba(10, 20, 30, 0.6),
-      rgba(0, 0, 0, 0.7)
-    ),
-    var(--bg-light);
-  background-image:
-    linear-gradient(
-      to bottom right,
-      rgba(var(--primary-rgb), 0.2),
-      rgba(var(--accent-rgb), 0.5)
-    ),
-    url(/download.jpeg);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  color: var(--text-dark);
-  box-shadow: inset 0 0 50px rgba(0, 229, 255, 0.15);
-  transition: background  0.4s ease, color 0.4s ease;
-}
 
 
 .about-hero{
@@ -246,7 +223,7 @@ html {
       rgba(var(--primary-rgb), 0.2),
       rgba(var(--accent-rgb), 0.5)
     ),
-    url(/about2.jpeg);
+   ;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -260,17 +237,17 @@ html {
   background-color: var(--bg-medium);
   color: var(--text-light);
 }
-.about h3 h4 p .contact h2 h3 {
+/* .about h3 h4 p .contact h2 h3 {
   color: var(--text-dark);
-}
+} */
 .abt-card, .con-card{
   background-color: var(--card-bg);
    box-shadow: var(--shadow);
 }
 
-.about-content h2, .contact-content h2, .faq-content h2, .about h2 {
+/* .about-content h2, .contact-content h2, .faq-content h2, .about h2 {
   color: var(--text-dark);
-}
+} */
 .abt-img:hover {
   animation-play-state: paused;
   transform: scale(1.02); /* small zoom-in on hover */
@@ -304,12 +281,12 @@ html {
   box-shadow: var(--shadow);
   border: 1px solid var(--border-color);
 }
-
+/* 
 .contact-content span
 input
 label {
   color: var(--text-light);
-}
+} */
 
 /* === Button Style Example === */
 .btn {
@@ -328,16 +305,6 @@ label {
 }
 
 
-.login-content, .register-content, .verify-otp{
-  /* background-color: var(--accent); */
-  background-image: url(/auth.jpg);
-  box-shadow: var(--glow-color);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  color: var(--text-light);
-  
-}
 
 footer{
   background-color: var(--bg-dark);

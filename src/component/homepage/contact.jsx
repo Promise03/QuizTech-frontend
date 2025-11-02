@@ -33,12 +33,12 @@ export default function Contact() {
 
               <div className="flex items-center gap-4">
                 <Phone className="text-blue-500" />
-                <span>+1 (555) 123-4567</span>
+                <span>+234 813 9188 264</span>
               </div>
 
               <div className="flex items-center gap-4">
                 <MessageSquare className="text-blue-500" />
-                <span>info@quiztech.com</span>
+                <span>rachealoluwapelumi77@gmail.com</span>
               </div>
             </div>
           </div>

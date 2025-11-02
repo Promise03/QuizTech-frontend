@@ -177,6 +177,12 @@ const DocumentsAdmin = () => {
               <option value="Backend">Backend</option>
               <option value="Fullstack">Fullstack</option>
               <option value="DevOps">DevOps</option>
+               <option value="CyberSecurity">Cyber Security</option>
+                  <option value="MobileDevelopment">Mobile Development</option>
+                  <option value="CloudComputing">Cloud Computing</option>
+                  <option value="AI/MachineLearning">AI/Machine Learning</option>
+                   <option value="FullStack">FullStack</option>
+                  <option value="DataAnalysis">Data Analysis</option>
             </select>
             <input
               type="text"

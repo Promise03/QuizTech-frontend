@@ -14,8 +14,11 @@ import { logout } from "../../redux/Slice/LoginSlice";
 
 const AdminSidebar = ({ open, toggle, closeOnMobile }) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate(); // ✅ added for redirect after logout
+  const navigate = useNavigate();
   const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
+
+  // ✅ State for logout confirmation modal
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 1024);
@@ -31,10 +34,11 @@ const AdminSidebar = ({ open, toggle, closeOnMobile }) => {
     { name: "Document", icon: Book, path: "/admin/document" },
   ];
 
-  const handleLogout = () => {
-    dispatch(logout());       // ✅ clears Redux + localStorage
-    closeOnMobile();          // ✅ close sidebar on mobile
-    navigate("/login");       // ✅ redirect to login page
+  // ✅ Actual logout after confirmation
+  const handleLogoutConfirm = () => {
+    dispatch(logout());
+    closeOnMobile();
+    navigate("/login");
   };
 
   return (
@@ -90,7 +94,7 @@ const AdminSidebar = ({ open, toggle, closeOnMobile }) => {
 
         <div className="border-t border-indigo-700 p-4">
           <button
-            onClick={handleLogout}
+            onClick={() => setShowLogoutModal(true)}
             className="flex items-center gap-3 px-4 py-3 rounded-xl text-red-300 hover:bg-red-700/40 hover:text-red-200 transition-all duration-200 w-full justify-center"
           >
             <LogOut size={22} />
@@ -104,6 +108,31 @@ const AdminSidebar = ({ open, toggle, closeOnMobile }) => {
           </button>
         </div>
       </aside>
+
+      {/* === Logout Confirmation Modal === */}
+      {showLogoutModal && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-[999]">
+          <div className="bg-white rounded-2xl shadow-lg p-6 w-[90%] max-w-sm text-center">
+            <h2 className="text-lg font-semibold text-gray-800 mb-4">
+              Are you sure you want to logout?
+            </h2>
+            <div className="flex justify-center space-x-4">
+              <button
+                onClick={handleLogoutConfirm}
+                className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition"
+              >
+                Yes, Logout
+              </button>
+              <button
+                onClick={() => setShowLogoutModal(false)}
+                className="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };
