@@ -27,7 +27,7 @@ const Header = ({ title = "QiuzTech", toggleSidebar, sidebarOpen }) => {
       {/* === Right Section: Start Quiz Button === */}
       <a
         href="#"
-        className="flex items-center px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors duration-300"
+        className=" items-center px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors duration-300 lg:block hidden"
       >
         <Play size={20} className="mr-2" />
         Start a New Quiz

@@ -39,7 +39,7 @@ export default function Register() {
   const validatePassword = (password) => {
     // Must be 8+ chars, contain uppercase, lowercase, number, and special char
     const regex =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&]{8,}$/;
     return regex.test(password);
   };
 

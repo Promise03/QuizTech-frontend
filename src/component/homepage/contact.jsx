@@ -44,7 +44,7 @@ export default function Contact() {
           </div>
 
           {/* Contact Form */}
-          <div className="flex-1 bg-gray-800 p-8 rounded-xl shadow-lg contact">
+          <div className="flex-1 bg-gray-800  rounded-xl shadow-lg contact">
             <form className="space-y-5">
               <div>
                 <label htmlFor="name" className="block mb-2 ">

@@ -48,7 +48,7 @@ const Contact = () => {
       </div>
 
       {/* Contact Section */}
-      <div className="min-h-screen contact px-8 py-20 con-card">
+      <div className="min-h-screen contact  py-20 con-card">
         <div
           className="container mx-auto max-w-5xl p-10 md:p-16 rounded-2xl shadow-xl backdrop-blur-md hover:shadow-2xl transition-all duration-300"
           data-aos="fade-up"

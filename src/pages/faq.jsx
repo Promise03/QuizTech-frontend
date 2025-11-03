@@ -11,15 +11,15 @@ export default function FAQ() {
         'Creating an account is easy! Simply click on the "Sign Up" button in the top right corner, enter your email address, choose a password, and you\'re ready to start quizzing!',
     },
     {
-      question: "Is QuizMaster free to use?",
+      question: "Is QuizTech free to use?",
       answer:
-        "Yes, QuizMaster offers a free plan with access to thousands of quizzes. We also offer a premium subscription with additional features like ad-free experience, detailed analytics, and exclusive quizzes.",
+        "Yes, QuizTech offers a free plan with access to thousands of quizzes. We also offer a premium subscription with additional features like ad-free experience, detailed analytics, and exclusive quizzes.",
     },
-    {
-      question: "Can I create my own quizzes?",
-      answer:
-        "Absolutely! Our quiz creation tools allow you to easily create custom quizzes on any topic. You can share them with friends or make them public for the entire QuizMaster community to enjoy.",
-    },
+    // {
+    //   question: "Can I create my own quizzes?",
+    //   answer:
+    //     "Absolutely! Our quiz creation tools allow you to easily create custom quizzes on any topic. You can share them with friends or make them public for the entire QuizMaster community to enjoy.",
+    // },
     {
       question: "How are the leaderboards calculated?",
       answer:
@@ -34,17 +34,17 @@ export default function FAQ() {
   return (
     <div className="faq-content py-20 px-0">
       <section>
-        <div className="container">
-          <div className="text-center mb-12">
+        <div className="container ">
+          <div className="text-center mb-12 ">
             <h2 className="text-4xl font-semibold mb-4 text-[#212529]">
               Frequently Asked Questions
             </h2>
             <p className="max-w-150 mx-auto text-[#6c757d]">
-              Find answers to common questions about QuizMaster
+              Find answers to common questions about QuizTech
             </p>
           </div>
 
-          <div className="max-w-2xl mx-auto">
+          <div className="max-w-2xl mx-3 ">
             {faqs.map((faq, index) => (
               <div
                 key={index}
