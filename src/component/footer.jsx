@@ -39,10 +39,10 @@ export default function Footer() {
               Login
             </Link>
 
-            {/* 🌙 Theme Toggle */}
+            {/* 🌙 Theme Toggle
             <div className="mt-2">
               <ThemeToggle />
-            </div>
+            </div> */}
           </nav>
         </div>
 
@@ -101,7 +101,7 @@ export default function Footer() {
             <button
               type="submit"
               className="px-6 py-3 font-bold text-white rounded-xl shadow-lg 
-                         bg-[var(--primary)] hover:bg-[var(--primary-light)] 
+                         btn 
                          transform hover:scale-105 transition-all duration-300"
             >
               Subscribe

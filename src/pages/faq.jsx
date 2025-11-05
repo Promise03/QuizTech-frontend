@@ -36,15 +36,15 @@ export default function FAQ() {
       <section>
         <div className="container ">
           <div className="text-center mb-12 ">
-            <h2 className="text-4xl font-semibold mb-4 text-[#212529]">
+            <h2 className="text-4xl font-semibold mb-4 ">
               Frequently Asked Questions
             </h2>
-            <p className="max-w-150 mx-auto text-[#6c757d]">
+            <p className="max-w-150 mx-auto ">
               Find answers to common questions about QuizTech
             </p>
           </div>
 
-          <div className="max-w-2xl mx-3 ">
+          <div className="max-w-2xl lg:mx-auto mx-3 ">
             {faqs.map((faq, index) => (
               <div
                 key={index}

@@ -110,7 +110,7 @@ const Contact = () => {
                 <div className="flex justify-end">
                   <button
                     type="submit"
-                    className="inline-block px-8 py-4 text-lg font-bold text-white bg-gradient-to-r from-indigo-600 to-blue-500 rounded-lg shadow-lg hover:from-indigo-700 hover:to-blue-600 transform hover:scale-105 transition-all duration-300"
+                    className="inline-block px-8 py-4 text-lg font-bold btn transform hover:scale-105 transition-all duration-300"
                   >
                     Send Message
                   </button>
@@ -163,19 +163,7 @@ const Contact = () => {
                   </a>
                 </div>
               </div>
-
-              {/* Optional Google Map */}
-              <div className="pt-6">
-                {/* <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.086679185285!2d-122.41941548468117!3d37.77492927975939!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085808c0d123!2sQuiz+HQ!5e0!3m2!1sen!2sus!4v1610000000000!5m2!1sen!2sus"
-                  width="100%"
-                  height="250"
-                  allowFullScreen=""
-                  loading="lazy"
-                  className="rounded-xl border-none"
-                  title="Quiz HQ Location"
-                ></iframe> */}
-              </div>
+             
             </div>
           </div>
         </div>

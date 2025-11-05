@@ -29,7 +29,7 @@ export default function About() {
           </p>
           <button
             onClick={toggleLogin}
-            className="mt-4 bg-blue-600 hover:bg-blue-700 transition-all duration-300 rounded-3xl px-6 py-3 font-medium"
+            className="mt-4  transition-all duration-300 rounded-3xl px-6 py-3 font-medium btn"
           >
             Get Started
           </button>

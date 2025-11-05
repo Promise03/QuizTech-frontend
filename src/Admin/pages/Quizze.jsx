@@ -375,11 +375,11 @@ const handleGenerateAIQuiz = async (documentId) => {
                   <option value="Frontend">Frontend</option>
                   <option value="Backend">Backend</option>
                    <option value="Frontend">Cyber Security</option>
-                  <option value="DevOps">Mobile Development</option>
-                  <option value="Frontend">Cloud Computing</option>
-                  <option value="Backend">AI/Machine Learning</option>
-                   <option value="Frontend">FullStack</option>
-                  <option value="DevOps">Data Analysis</option>
+                  <option value="mobileDeveplment">Mobile Development</option>
+                  <option value="cloudComputing">Cloud Computing</option>
+                  <option value="AI/machinelearning">AI/Machine Learning</option>
+                   <option value="Fullstack">FullStack</option>
+                  <option value="Data Analysis">Data Analysis</option>
                 </select>
               </div>
 

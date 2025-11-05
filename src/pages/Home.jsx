@@ -53,9 +53,8 @@ const Home = () => {
     <button
       onClick={toggleLogin}
       className="relative inline-block px-10 py-4 text-lg md:text-xl font-semibold rounded-full 
-                 bg-gradient-to-r from-blue-500 to-indigo-600 
-                 hover:from-blue-600 hover:to-indigo-700 
-                 text-white shadow-lg transition-all duration-300 
+             btn
+                  shadow-lg transition-all duration-300 
                  hover:shadow-2xl focus:ring-4 focus:ring-blue-400/50"
       data-aos="zoom-in"
       data-aos-duration="900"

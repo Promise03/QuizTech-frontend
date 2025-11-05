@@ -148,7 +148,7 @@ export default function Login() {
               className={`w-full p-3 rounded-2xl text-lg font-serif text-white transition-all duration-300 shadow-md ${
                 loading
                   ? "bg-gray-500 cursor-not-allowed"
-                  : "bg-blue-600 hover:bg-blue-700 hover:shadow-lg"
+                  : "btn"
               }`}
             >
               {loading ? "Logging in..." : "Login"}

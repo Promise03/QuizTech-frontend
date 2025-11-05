@@ -12,7 +12,7 @@ export default function Header() {
   return (
     <header className="fixed top-0 w-full z-50 navbar  text-white shadow-md">
       <div className="flex items-center justify-between px-4 py-3">
-        <h1 className="text-3xl font-serif font-light">QuizTech</h1>
+        <h1 className="text-3xl font-serif font-bold">QuizTech</h1>
 
         {/* Desktop Menu */}
         <nav className="hidden md:flex items-center gap-8">

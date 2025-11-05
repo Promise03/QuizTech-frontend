@@ -193,7 +193,7 @@ export default function Register() {
               className={`w-full p-3 rounded-2xl text-lg font-serif text-white transition-all duration-300 shadow-md ${
                 loading
                   ? "bg-gray-500 cursor-not-allowed"
-                  : "bg-indigo-600 hover:bg-indigo-700 hover:shadow-lg"
+                  : "btn"
               }`}
             >
               {loading ? "Registering..." : "Register"}

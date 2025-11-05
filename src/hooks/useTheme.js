@@ -26,10 +26,7 @@ export function useTheme() {
       setTheme((prev) => (prev === "dark" ? "light" : "dark"));
     }, 100); // apply theme after short delay
 
-    // setTimeout(() => {
-    //   overlay.classList.remove("active");
-    //   setTimeout(() => overlay.remove(), 400); // cleanup
-    // }, 400);
+
   };
 
   return { theme, toggleTheme };
